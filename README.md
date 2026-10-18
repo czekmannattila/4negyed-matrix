@@ -1,1 +1,1 @@
-# 4negyed-matrix
+# strategiai-matrix
