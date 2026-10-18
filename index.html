@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stratégiai Döntési Mátrix — Executive C-Level Edition (v20)</title>
+<title>Stratégiai Döntési Mátrix — Executive C-Level Edition (v21 All-Interactive)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -298,7 +298,7 @@ body.mode-intro .card.intro-revealed .profile{margin-top:auto;margin-bottom:auto
       <h1 id="dimTitle">Módszertan és Problémamegoldási Keretrendszerek</h1>
       <p id="dimDesc">Hogyan strukturáljuk a folyamatokat a feladat és a technológia bizonytalansága szerint?</p>
     </div>
-    <div class="header-meta" id="headerMeta">12 dimenziós döntési modell · Kattints a címkékre az illusztrált ábrákhoz!</div>
+    <div class="header-meta" id="headerMeta">12 dimenziós döntési modell · Kattints bármelyik címkére az egyedi ábrához!</div>
   </section>
 
   <!-- Stage -->
@@ -592,7 +592,7 @@ body.mode-intro .card.intro-revealed .profile{margin-top:auto;margin-bottom:auto
 </div>
 
 <script>
-// 12 DIMENZIÓ ADATAI (KIÍRT TELJES RÖVIDÍTÉSEKKEL!)
+// 12 DIMENZIÓ TELJES ADATAI
 const dimensions = [
   {
     id: "modszertan",
@@ -729,403 +729,117 @@ const dimensions = [
   }
 ];
 
-// RÉSZLETES MÓDSZERTANI, ESZKÖZ ÉS FOGALOM TÁR (MINDEN BETŰSZÓ KIÍRVA!)
-const toolDictionary = {
-  // Q1 Módszertan & AI
-  "WBS — Munkacsomag-lebontás": {
-    name: "WBS — Work Breakdown Structure (Munkacsomag-lebontási Struktúra)",
-    badge: "Q1 OPERÁCIÓ // FELADATLEBONTÁS",
-    desc: "A teljes projekt céljának hierarchikus, 100%-os szabály szerinti felbontása önálló munkacsomagokra. Nincs átfedés, minden feladathoz egyetlen felelős és határidő tartozik.",
-    how: "A projektvezető a kész végtermékből indul ki lefelé haladva (Deliverables), amíg mérhető, delegálható és forintosítható egységekhez nem jut.",
-    quote: "„Ha egy feladat nincs benne a WBS-ben, az jogilag és operatívan nem létezik a projektben.”"
-  },
-  "Gantt & CPM — Kritikus Út": {
-    name: "Gantt-diagram & CPM (Critical Path Method — Kritikus Út Módszer)",
-    badge: "Q1 OPERÁCIÓ // ÜTEMTERVEZÉS",
-    desc: "Vízszintes idősávos ütemterv a feladatok közötti függőségi láncokkal. Azonosítja a kritikus utat: a leghosszabb összefüggő szakaszt, ahol bármely feladat 1 napos csúszása a teljes projekt átadását tolja.",
-    how: "A projektmenedzser folyamatosan kalkulálja a tartalékidőket (Float). A kritikus út feladatait védik a legmagasabb prioritással.",
-    quote: "„A kritikus út nem ismer toleranciát: a tartalék nélküli csúszás azonnali kötbérveszély.”"
-  },
-  "Six Sigma DMAIC Minőségirányítás": {
-    name: "Six Sigma DMAIC Módszertan (Define, Measure, Analyze, Improve, Control)",
-    badge: "Q1 OPERÁCIÓ // MINŐSÉG ÉS HIBACSÖKKENTÉS",
-    desc: "Statisztikai minőségirányítási eljárás a folyamatingadozások kiküszöbölésére. A cél a hibák arányát 3,4 hiba / egymillió lehetőség szint alá szorítani.",
-    how: "1. Define (Definiálás) ➔ 2. Measure (Mérés) ➔ 3. Analyze (Elemzés) ➔ 4. Improve (Fejlesztés) ➔ 5. Control (Kontroll/Standardizálás).",
-    quote: "„Csak azt tudod fejleszteni, amit képes vagy matematikailag és statisztikailag mérni.”"
-  },
-  "ISO 9001 / 55001 Szabványrendszerek": {
-    name: "ISO Szabványrendszerek (ISO 9001 Minőségirányítás / ISO 55001 Vagyonkezelés)",
-    badge: "Q1 OPERÁCIÓ // AUDIT & COMPLIANCE",
-    desc: "Nemzetközileg auditált, szigorúan dokumentált vállalati eljárásrend. Biztosítja az operáció folytonosságát függetlenül a munkatársak személyétől.",
-    how: "Minden lépés Standard Működési Eljárásokban (SOP) van rögzítve, rendszeres külső és belső megfelelőségi auditokkal.",
-    quote: "„Írd le, amit csinálsz, és precízen csináld azt, amit leírtál!”"
-  },
-  "RPA — Szoftverrobotizáció": {
-    name: "RPA — Robotic Process Automation (Szabályalapú Szoftverrobotizáció)",
-    badge: "Q1 OPERÁCIÓ // DIGITÁLIS FUTÓSZALAG",
-    desc: "Szoftveres robotok, amelyek a monoton, ismétlődő emberi kattintásokat és adatátvitelt másolják le meglévő rendszerek között 24/7 üzemben, nulla elütéssel.",
-    how: "Nem nyúl a forráskódhoz: felhasználói felület (UI) szinten vagy API-kon keresztül mozgat adatokat Excel, levelezés és ERP rendszerek között.",
-    quote: "„Ne embereket fizessünk azért, hogy robotként kattintsanak: dolgozzon a szoftverrobot!”"
-  },
-  "OCR — Számlafeldolgozás": {
-    name: "OCR — Optical Character Recognition (Optikai Karakterfelismerés és Adatbányászat)",
-    badge: "Q1 OPERÁCIÓ // AUTOMATIZÁLT KÖNYVELÉS",
-    desc: "Képi és beolvasott PDF dokumentumok géppel olvasható, strukturált formátummá (JSON, XML) alakítása mesterséges intelligencia alapú ellenőrzéssel.",
-    how: "Beolvassa a számlát, azonosítja a kulcsmezőket (IBAN, partner, bruttó összeg, ÁFA), és jóváhagyás után közvetlenül könyveli az ERP-ben.",
-    quote: "„A manuális számlarögzítés a 21. századi irodai munka legnagyobb pénzégetője.”"
-  },
-  "Workflow Motorok (BPMN)": {
-    name: "BPMN — Business Process Model and Notation (Üzleti Folyamatmodellező Motorok)",
-    badge: "Q1 OPERÁCIÓ // FOLYAMATVEZÉRLÉS",
-    desc: "Automatizált döntési és jóváhagyási lánc. Kizárja a szubjektív emberi mulasztást: az ügyirat nem léphet a következő szintre az előírt jóváhagyások nélkül.",
-    how: "Grafikus szabályrendszer szerint osztja ki a feladatokat, méri az átfutási időt (SLA), és eszkalál, ha egy vezető késlekedik.",
-    quote: "„A folyamatmotor nem engedi át a kifizetést, ha hiányzik a második szintű ellenjegyzés.”"
-  },
-  "ERP Integráció & Automatizálás": {
-    name: "ERP — Enterprise Resource Planning (Vállalatirányítási Rendszer Integráció)",
-    badge: "Q1 OPERÁCIÓ // DIGITÁLIS GERINC",
-    desc: "A vállalat központi adatbázisának összekötése az operatív munkaállomásokkal. Egyetlen hiteles adatforrás a teljes szervezet számára.",
-    how: "Valós idejű szinkronizáció a gyártás, beszerzés, pénzügy és raktárkészlet között zárt interfészeken.",
-    quote: "„A szigetszerű táblázatok ideje lejárt: egyetlen igazság van, az ERP adata.”"
-  },
-
-  // Q2 K+F & Innováció
-  "TRL 1-9 Technológiai Érettség": {
-    name: "TRL — Technology Readiness Level (Technológiai Érettségi Szintek 1-től 9-ig)",
-    badge: "Q2 INNOVÁCIÓ // K+F KOCKÁZATMÉRÉS",
-    desc: "A NASA által kidolgozott 9 fokozatú skála, amely méri egy kutatás érettségét az elméleti alapötlettől (TRL 1) a teljes körű piaci/ipari működésig (TRL 9).",
-    how: "Minden szinthez szigorú mérési kritériumok tartoznak. Megakadályozza, hogy éretlen laborkísérletre (TRL 3) gyárépítési büdzsét költsünk.",
-    quote: "„Ne ruházz be milliárdokat egy olyan technológiába, ami még csak TRL 4 szinten működött!”"
-  },
-  "FMEA Kockázatelemzés": {
-    name: "FMEA — Failure Mode and Effects Analysis (Hibamód- és Hatáselemzés)",
-    badge: "Q2 INNOVÁCIÓ // KOCKÁZAT-PREVENCIÓ",
-    desc: "Mérnöki megelőző módszertan. Már a tervezőasztalon számba veszi az összes lehetséges technikai meghibásodást és azok súlyosságát.",
-    how: "Kiszámítja az RPN (Risk Priority Number) kockázati értéket: Súlyosság (S) × Előfordulási gyakoriság (O) × Észlelhetőség (D).",
-    quote: "„A hibát a CAD tervezőasztalon kijavítani filléres dolog; a visszahívott szériát javítani milliárdos bukás.”"
-  },
-  "DOE Kísérlettervezés": {
-    name: "DOE — Design of Experiments (Faktoriális Kísérlettervezés)",
-    badge: "Q2 INNOVÁCIÓ // MATEMATIKAI KÍSÉRLETEZÉS",
-    desc: "Statisztikai módszer, amellyel minimális számú laboratóriumi kísérletből meghatározható a bemeneti változók optimális kombinációja.",
-    how: "Egyszerre több paramétert változtat szabályozott mátrixban ahelyett, hogy vaktában, egyesével próbálgatnák a beállításokat.",
-    quote: "„Matematikai precizitás a sötétben való tapogatózás helyett.”"
-  },
-  "Digital Twin Virtuális Ikerpár": {
-    name: "Digital Twin (Digitális / Virtuális Ikerpár)",
-    badge: "Q2 INNOVÁCIÓ // SZIMULÁCIÓS TECHNOLÓGIA",
-    desc: "Egy fizikai termék, gépsor vagy folyamat élő, valós idejű számítógépes modellje szenzoradatok alapján.",
-    how: "Virtuálisan teszteli a szélsőséges fizikai terheléseket és anyagfáradást anélkül, hogy a drága fizikai prototípust összetörnénk.",
-    quote: "„A szimulátorban zuhanjon le a repülőgép, ne az első éles tesztrepülésen!”"
-  },
-  "Prediktív Karbantartás": {
-    name: "PdM — Predictive Maintenance (Prediktív Karbantartás)",
-    badge: "Q2 INNOVÁCIÓ // GÉPI TANULÁS",
-    desc: "Gépi tanulásos algoritmusok elemzik a rezgés-, hő- és akusztikai szenzorokat, hogy megjósolják a gép meghibásodását még a leállás előtt.",
-    how: "Az anomália észlelésekor automatikusan ütemezi a szervizt a tervezett üzemszüneti ablakban.",
-    quote: "„Nem naptár szerint javítunk, és nem várjuk meg a törést: a gép előre szól, mikor fárad el az alkatrész.”"
-  },
-  "Neurális Hálózatok (ML)": {
-    name: "Neurális Hálózatok és Gépi Tanulás (Machine Learning)",
-    badge: "Q2 INNOVÁCIÓ // MÉLYTANULÁS",
-    desc: "Több rétegű neurális hálók komplex nemlineáris összefüggések modellezésére és optimalizálására.",
-    how: "Történeti és laboratóriumi adatokon tanítva előrejelzi a gyártási hozamot vagy a fizikai paramétereket.",
-    quote: "„Ahol a klasszikus fizikai egyenletek túl bonyolulttá válnak, ott a neurális háló ad pontos becslést.”"
-  },
-
-  // Q3 Lean & Design Thinking
-  "Design Thinking — Kettős Gyémánt": {
-    name: "Design Thinking — Double Diamond (Kettős Gyémánt Modell)",
-    badge: "Q3 ADAPTÁCIÓ // EMBERKÖZPONTÚ TERVEZÉS",
-    desc: "Emberközpontú innovációs keretrendszer. Kétszer nyitunk (divergálás) és kétszer zárunk (konvergálás), hogy a valódi felhasználói problémát oldjuk meg.",
-    how: "1. Discover (Feltárás empátiával) ➔ 2. Define (Fájdalompont fókuszálása) ➔ 3. Develop (Ötletelés) ➔ 4. Deliver (MVP tesztelés).",
-    quote: "„Ne a technológiából indulj ki, hanem az ügyfél kimondatlan, valós szenvedéséből!”"
-  },
-  "Lean Startup (MVP)": {
-    name: "MVP — Minimum Viable Product (Minimálisan Működőképes Termék)",
-    badge: "Q3 ADAPTÁCIÓ // PIACI VALIDÁCIÓ",
-    desc: "A lehető legkisebb befektetéssel elkészített működő verzió, amellyel a valódi piacon igazolható, hogy a vevő hajlandó-e fizetni a megoldásért.",
-    how: "Gyors ciklus: Építs (Build) ➔ Mérj (Measure) ➔ Tanulj (Learn).",
-    quote: "„Ha nem érzed kissé kínosnak az első piacra vitt verziódat, túl későn léptél ki a vevők elé.”"
-  },
-  "VSM — Értékáram-Térképezés": {
-    name: "VSM — Value Stream Mapping (Értékáram-Térképezés)",
-    badge: "Q3 LEAN // FOLYAMATOPTIMALIZÁLÁS",
-    desc: "Grafikus folyamatelemzés, amely elválasztja az értéknövelő lépéseket a felesleges várakozási időktől a vevői rendeléstől a kiszállításig.",
-    how: "Feltárja a valós átfutási időt (Lead Time) a tiszta megmunkálási idővel (Process Time) szemben, és láthatóvá teszi a torlódásokat.",
-    quote: "„Egy tipikus 30 napos folyamatban a valós értékteremtés gyakran 4 óránál is kevesebb: a többi tiszta várakozás.”"
-  },
-  "8 Muda Veszteségvadászat": {
-    name: "A 8 Muda (A Lean Veszteségfajták Teljes Felszámolása)",
-    badge: "Q3 LEAN // VESZTESÉGCSÖKKENTÉS",
-    desc: "A termelés és az irodai munka 8 fő pénzpazarlása: Túlgyártás, Várakozás, Felesleges Szállítás, Túlbonyolítás, Felesleges Készlet, Felesleges Mozgás, Selejt, Kiaknázatlan Tehetség.",
-    how: "A csapatok közvetlenül a munkavégzés helyszínén (Gemba) azonosítják és vágják le a folyamatról a sallangokat.",
-    quote: "„Bármi, amiért a vevő számlázáskor nem fizet szívesen, az veszteség: irtsuk ki a folyamatból!”"
-  },
-  "Pivot — Stratégiai Irányváltás": {
-    name: "Pivot (Tudatos Stratégiai Irányváltás)",
-    badge: "Q3 ADAPTÁCIÓ // PIACI KORREKCIÓ",
-    desc: "A technológiai mag megtartásával az üzleti modell, a célcsoport vagy a monetizáció megváltoztatása a mérési adatok alapján.",
-    how: "Amikor a validáció bebizonyítja, hogy az eredeti probléma-hipotézis nem él, de a kifejlesztett eszköz más piacon óriási érték.",
-    quote: "„A falnak menni nem kitartás, hanem butaság: az irányváltás a felnőtt innováció védjegye.”"
-  },
-  "Process Mining — Folyamatbányászat": {
-    name: "Process Mining (Adatvezérelt Folyamatbányászat)",
-    badge: "Q3 ADAPTÁCIÓ // RÖNTGENFELVÉTEL",
-    desc: "Az informatikai rendszerek (ERP, CRM) eseménynaplóinak (Event Logs) rekonstrukciója, amely megmutatja a folyamatok valós, kaotikus útvonalát.",
-    how: "Összeveti az elméleti folyamatábrát a valósággal: azonnal kimutatja a rejtett szűk keresztmetszeteket és az engedély nélküli kerülőutakat.",
-    quote: "„Ne higgy a szép folyamatábráknak: nézd meg, mit rögzítettek a szerverek a valóságban!”"
-  },
-
-  // Q4 Agilitás & Felfedezés
-  "Kutatási Spikes": {
-    name: "Spike (Időkorlátos Kutatási Sprint)",
-    badge: "Q4 FELFEDEZÉS // AGILE KOCKÁZATCSÖKKENTÉS",
-    desc: "Rövid, szigorúan időkorlátos (Timeboxed, 2-3 napos) intenzív kísérlet egyetlen ismeretlen technikai vagy piaci kérdés megválaszolására.",
-    how: "Félreteszik a funkciófejlesztést, és csak addig kódolnak vagy mérnek, amíg el nem oszlik a kockázati bizonytalanság.",
-    quote: "„Ne próbálj megbecsülni egy feladatot, amiről még fogalmad sincs: csinálj Spike-ot és tanuld meg a határokat!”"
-  },
-  "Sprint Backlog": {
-    name: "Sprint Backlog (Iterációs Feladatlista)",
-    badge: "Q4 FELFEDEZÉS // KÖZVETLEN FÓKUSZ",
-    desc: "Az 1-2 hetes ciklusra elvállalt, szigorúan priorizált munkacsomagok és kísérletek listája.",
-    how: "A keresztfunkcionális csapat maga választja ki a tételeket a termékfelelős (PO) céljai alapján; a vezetés kívülről nem nyúlhat bele a futó sprintbe.",
-    quote: "„A fókuszált haladás záloga a rövid távú elköteleződés és a zavartalan munkavégzés védelme.”"
-  },
-  "Daily Standup — Napi Szinkron": {
-    name: "Daily Standup (15 Perces Napi Taktikai Egyeztetés)",
-    badge: "Q4 FELFEDEZÉS // NAPI ALKALMAZKODÁS",
-    desc: "Napi 15 perces álló koordinációs megbeszélés az autonóm Squad tagjai között.",
-    how: "Három fókuszpont: Mit értem el tegnap? Mit tervezek ma? Mi az az akadály, ami blokkolja a haladásomat?",
-    quote: "„Nem státuszriport a menedzsernek, hanem a csapat taktikai összehangolódása a sprintcél eléréséért.”"
-  },
-  "Heti Retrospektív": {
-    name: "Sprint Retrospektív (Szervezeti Tanulási Ciklus)",
-    badge: "Q4 FELFEDEZÉS // SZERVEZETI GYORSULÁS",
-    desc: "Minden ciklus végén tartott őszinte, pszichológiailag biztonságos műhely, amely az együttműködés és a folyamatok javítását szolgálja.",
-    how: "A csapat feltárja a súrlódási pontokat, és azonnali, kötelező vállalásokat tesz a következő sprintre.",
-    quote: "„Aki nem tart retrospektívet, garantáltan megismétli a korábbi hibáit a következő ciklusban is.”"
-  },
-  "Multi-Agent Rendszerek": {
-    name: "Multi-Agent AI Architektúrák (Autonóm Együttműködő Ágensek)",
-    badge: "Q4 FELFEDEZÉS // KUTATÁSI AUTOMATIZÁCIÓ",
-    desc: "Egymással kommunikáló, specializált mesterséges intelligencia ágensek hálózata, amelyek emberi beavatkozás nélkül képesek hipotéziseket generálni és kódolni.",
-    how: "Egy tervező, egy végrehajtó és egy bíráló ágens folyamatos párbeszédben iterál az ismeretlen megoldáson.",
-    quote: "„A jövő kutatócsapata nemcsak emberekből, hanem önállóan tanuló autonóm szoftverágensekből áll.”"
-  },
-
-  // Pénzügy & Szerződés
-  "EVM — Értékelemzés": {
-    name: "EVM — Earned Value Management (Költség- és Értékelemzés)",
-    badge: "Q1 PÉNZÜGY // TELJESÍTMÉNYKONTROLL",
-    desc: "Nemzetközileg elfogadott pénzügyi módszer a projekt előrehaladásának mérésére a terv, a tényleges költség (AC) és a megvalósult érték (EV) összevetésével.",
-    how: "Kiszámítja az SPI (Ütemterv Index) és CPI (Költségteljesítmény Index) mutatókat a várható végső büdzsé előrejelzéséhez.",
-    quote: "„A költés nem azonos az elkészült értékkel: az EVM megmutatja, pontosan mennyit ér a pénzünk a projektben.”"
-  },
-  "Fixed Price — Fix Áras Szerződés": {
-    name: "Fixed Price (Fix Áras és Kötbérgaranciás Szerződés)",
-    badge: "Q1 JOG & PÉNZÜGY // KOCKÁZATÁTHÁRÍTÁS",
-    desc: "A beszállító fix összegért vállalja a pontosan specifikált műszaki terjedelem határidőre történő leszállítását szigorú kötbér mellett.",
-    how: "Kizárólag Q1 környezetben működik, ahol a feladat és a megoldás 100%-ig ismert. Ismeretlen projekteknél törvényszerűen pereskedéshez vezet.",
-    quote: "„Ha a cél ismert, a fix ár védelmet ad; ha a cél ködös, a fix ár nem a kockázatot tünteti el, csak a józan észt.”"
-  },
-  "T&M — Time & Materials Elszámolás": {
-    name: "Time & Materials (T&M — Idő- és Anyagelszámolásos Keretszerződés)",
-    badge: "Q4 JOG & PÉNZÜGY // RUGALMAS INNOVÁCIÓ",
-    desc: "A megrendelő a ténylegesen ledolgozott mérnöki órákat és a felhasznált erőforrásokat fizeti a prioritások folyamatos, sprintenkénti alakítása mellett.",
-    how: "Agilis keretszerződéssel, kiemelt bizalommal és transzparens feladatkövetéssel párosul. A kockázatot a megrendelő és a csapat közösen viseli.",
-    quote: "„A felfedezést nem lehet kilóra megvenni: a szakértelmet és a tanulási sebességet finanszírozzuk.”"
-  },
-  "Gain-Share Megtakarítás-arányos": {
-    name: "Gain-Share (Érték- és Megtakarítás-arányos Megállapodás)",
-    badge: "Q3 JOG & PÉNZÜGY // SIKERÉRDEKELTSÉG",
-    desc: "A partner vagy a belső csapat díjazása közvetlenül a folyamatokban realizált igazolt költségcsökkentésből vagy bevételnövekedésből származik.",
-    how: "Baseline mérést követően a Lean átvilágítás során megtakarított összeg meghatározott százalékát kapja a csapat prémiumként.",
-    quote: "„A beszállító csak akkor keres pénzt, ha a mi vállalatunk is bizonyítottan gazdagodott a hatékonysággal.”"
-  }
-};
-
-// KIEGÉSZÍTETT SVG FOLYAMATÁBRÁK TÁRA
-const toolSvgs = {
-  "Design Thinking — Kettős Gyémánt": `<svg class="modal-diagram-svg" viewBox="0 0 360 210">
-    <polygon points="25,100 85,35 145,100 85,165" fill="#fff8ea" stroke="#df8e0a" stroke-width="2"/>
-    <line x1="85" y1="35" x2="85" y2="165" stroke="#df8e0a" stroke-dasharray="3 3"/>
-    <text x="55" y="104" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#ca8a04">DISCOVER</text>
-    <text x="115" y="104" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#ca8a04">DEFINE</text>
-    <polygon points="175,100 235,35 295,100 235,165" fill="#e8f7f1" stroke="#1fa876" stroke-width="2"/>
-    <line x1="235" y1="35" x2="235" y2="165" stroke="#1fa876" stroke-dasharray="3 3"/>
-    <text x="205" y="104" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#15803d">DEVELOP</text>
-    <text x="265" y="104" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#15803d">DELIVER</text>
-    <text x="85" y="185" font-family="'Manrope'" font-size="10" font-weight="bold" fill="#df8e0a" text-anchor="middle">1. A Valódi Probléma</text>
-    <text x="235" y="185" font-family="'Manrope'" font-size="10" font-weight="bold" fill="#1fa876" text-anchor="middle">2. A Valós Megoldás</text>
-    <text x="180" y="22" font-family="'JetBrains Mono'" font-size="9" fill="#64748b" text-anchor="middle">DOUBLE DIAMOND (Design Council)</text>
-  </svg>`,
+// MINDEN ALMENÜPONTOT FEDŐ SZEMANTIKUS SVG GENERÁLÓ MOTOR
+function generateSemanticSVG(key, qCode) {
+  const k = key.toLowerCase();
   
-  "WBS — Munkacsomag-lebontás": `<svg class="modal-diagram-svg" viewBox="0 0 320 200">
-    <rect x="95" y="10" width="130" height="34" rx="6" fill="#1fa876" fill-opacity="0.25" stroke="#1fa876" stroke-width="2"/>
-    <text x="160" y="32" fill="#142033" font-family="'JetBrains Mono'" font-size="11" font-weight="bold" text-anchor="middle">PROJEKT (100%)</text>
-    <path d="M160 44 V70 M45 70 H275 M45 70 V90 M160 70 V90 M275 70 V90" stroke="#1fa876" stroke-width="2" fill="none"/>
-    <rect x="10" y="90" width="70" height="30" rx="5" fill="#edf3f9" stroke="#7b94ad"/><text x="45" y="109" fill="#142033" font-family="'JetBrains Mono'" font-size="9" text-anchor="middle">WBS 1.1</text>
-    <rect x="125" y="90" width="70" height="30" rx="5" fill="#edf3f9" stroke="#7b94ad"/><text x="160" y="109" fill="#142033" font-family="'JetBrains Mono'" font-size="9" text-anchor="middle">WBS 1.2</text>
-    <rect x="240" y="90" width="70" height="30" rx="5" fill="#edf3f9" stroke="#7b94ad"/><text x="275" y="109" fill="#142033" font-family="'JetBrains Mono'" font-size="9" text-anchor="middle">WBS 1.3</text>
-  </svg>`,
-
-  "Gantt & CPM — Kritikus Út": `<svg class="modal-diagram-svg" viewBox="0 0 320 200">
-    <line x1="60" y1="25" x2="300" y2="25" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="90" y="18" fill="#64748b" font-size="9" font-family="'JetBrains Mono'">HÉT 1</text><text x="150" y="18" fill="#64748b" font-size="9" font-family="'JetBrains Mono'">HÉT 2</text><text x="210" y="18" fill="#64748b" font-size="9" font-family="'JetBrains Mono'">HÉT 3</text><text x="270" y="18" fill="#64748b" font-size="9" font-family="'JetBrains Mono'">HÉT 4</text>
-    <text x="10" y="52" fill="#334155" font-size="9.5" font-family="'JetBrains Mono'">Tervezés</text><rect x="65" y="40" width="70" height="20" rx="4" fill="#ef4444"/>
-    <text x="10" y="87" fill="#334155" font-size="9.5" font-family="'JetBrains Mono'">Engedély</text><rect x="135" y="75" width="85" height="20" rx="4" fill="#ef4444"/>
-    <text x="10" y="122" fill="#334155" font-size="9.5" font-family="'JetBrains Mono'">Beszerzés</text><rect x="90" y="110" width="55" height="20" rx="4" fill="#3b82f6"/>
-    <text x="10" y="157" fill="#334155" font-size="9.5" font-family="'JetBrains Mono'">Kivitelezés</text><rect x="220" y="145" width="75" height="20" rx="4" fill="#ef4444"/>
-    <text x="160" y="185" fill="#ef4444" font-size="9.5" font-weight="bold" font-family="'JetBrains Mono'" text-anchor="middle">PIROS SÁVOK = KRITIKUS ÚT (CPM)</text>
-  </svg>`,
-
-  "Six Sigma DMAIC Minőségirányítás": `<svg class="modal-diagram-svg" viewBox="0 0 320 200">
-    <circle cx="160" cy="95" r="65" stroke="#cbd5e1" stroke-width="2.5" fill="none" stroke-dasharray="6 6"/>
-    <rect x="125" y="12" width="70" height="28" rx="6" fill="#1fa876"/><text x="160" y="30" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">DEFINE</text>
-    <rect x="225" y="60" width="75" height="28" rx="6" fill="#1fa876" fill-opacity="0.85"/><text x="262" y="78" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">MEASURE</text>
-    <rect x="200" y="130" width="75" height="28" rx="6" fill="#1fa876" fill-opacity="0.7"/><text x="237" y="148" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">ANALYZE</text>
-    <rect x="50" y="130" width="75" height="28" rx="6" fill="#1fa876" fill-opacity="0.7"/><text x="87" y="148" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">IMPROVE</text>
-    <rect x="20" y="60" width="75" height="28" rx="6" fill="#1fa876" fill-opacity="0.85"/><text x="57" y="78" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">CONTROL</text>
-    <text x="160" y="98" fill="#1fa876" font-family="'Manrope'" font-size="14" font-weight="bold" text-anchor="middle">3,4 DPMO</text>
-  </svg>`,
-
-  "RPA — Szoftverrobotizáció": `<svg class="modal-diagram-svg" viewBox="0 0 340 200">
-    <rect x="15" y="70" width="70" height="55" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
-    <text x="50" y="95" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1e293b" text-anchor="middle">Input Adat</text>
-    <text x="50" y="112" font-family="'JetBrains Mono'" font-size="7.5" fill="#64748b" text-anchor="middle">(Excel/Űrlap)</text>
-    <path d="M85 97 H115" stroke="#1fa876" stroke-width="2"/>
-    <rect x="120" y="55" width="100" height="85" rx="8" fill="#e8f7f1" stroke="#1fa876" stroke-width="2"/>
-    <text x="170" y="85" font-family="'JetBrains Mono'" font-size="14" text-anchor="middle" fill="#1fa876">🤖</text>
-    <text x="170" y="112" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#142033" text-anchor="middle">RPA MOTOR</text>
-    <text x="170" y="127" font-family="'JetBrains Mono'" font-size="8" fill="#15803d" text-anchor="middle">If-Then szabályok</text>
-    <path d="M220 97 H250" stroke="#1fa876" stroke-width="2"/>
-    <rect x="255" y="45" width="70" height="35" rx="5" fill="#f8fafc" stroke="#64748b"/><text x="290" y="67" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#1e293b" text-anchor="middle">SAP / ERP</text>
-    <rect x="255" y="115" width="70" height="35" rx="5" fill="#f8fafc" stroke="#64748b"/><text x="290" y="137" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#1e293b" text-anchor="middle">Adatbázis</text>
-    <path d="M235 97 V62 H255" stroke="#1fa876" stroke-width="1.5" fill="none"/>
-    <path d="M235 97 V132 H255" stroke="#1fa876" stroke-width="1.5" fill="none"/>
-    <text x="170" y="175" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1fa876" text-anchor="middle">24/7 MŰKÖDÉS · NULLA GÉPELÉSI HIBA</text>
-  </svg>`,
-
-  "OCR — Számlafeldolgozás": `<svg class="modal-diagram-svg" viewBox="0 0 340 200">
-    <rect x="20" y="60" width="60" height="80" rx="4" fill="#fff" stroke="#dc2626" stroke-width="1.5"/>
-    <text x="50" y="85" font-family="'JetBrains Mono'" font-size="12" text-anchor="middle" fill="#dc2626">📄</text>
-    <text x="50" y="105" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#1e293b" text-anchor="middle">PDF Számla</text>
-    <line x1="30" y1="115" x2="70" y2="115" stroke="#cbd5e1" stroke-width="2"/>
-    <path d="M80 100 H115" stroke="#cbd5e1" stroke-width="2"/>
-    <rect x="120" y="55" width="95" height="90" rx="6" fill="#f8fafc" stroke="#38bdf8" stroke-width="2"/>
-    <line x1="125" y1="85" x2="210" y2="85" stroke="#38bdf8" stroke-width="2" stroke-dasharray="2 2"/>
-    <text x="167" y="105" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#0284c7" text-anchor="middle">OCR SCAN</text>
-    <text x="167" y="122" font-family="'JetBrains Mono'" font-size="7.5" fill="#64748b" text-anchor="middle">Karakterfelismerés</text>
-    <path d="M215 100 H245" stroke="#cbd5e1" stroke-width="2"/>
-    <rect x="250" y="60" width="75" height="80" rx="5" fill="#e8f7f1" stroke="#1fa876" stroke-width="1.5"/>
-    <text x="287" y="82" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#15803d" text-anchor="middle">JSON / XML</text>
-    <text x="287" y="102" font-family="'JetBrains Mono'" font-size="7" fill="#334155" text-anchor="middle">IBAN: HU42...</text>
-    <text x="287" y="117" font-family="'JetBrains Mono'" font-size="7" fill="#334155" text-anchor="middle">Összeg: 1.2M</text>
-    <text x="287" y="132" font-family="'JetBrains Mono'" font-size="7" fill="#334155" text-anchor="middle">ÁFA: 27%</text>
-  </svg>`,
-
-  "Workflow Motorok (BPMN)": `<svg class="modal-diagram-svg" viewBox="0 0 350 200">
-    <circle cx="35" cy="100" r="16" fill="#1fa876" fill-opacity="0.2" stroke="#1fa876" stroke-width="2"/>
-    <text x="35" y="104" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#15803d" text-anchor="middle">Start</text>
-    <path d="M51 100 H85" stroke="#64748b" stroke-width="2"/>
-    <rect x="85" y="75" width="75" height="50" rx="6" fill="#fff" stroke="#64748b" stroke-width="1.5"/>
-    <text x="122" y="97" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#1e293b" text-anchor="middle">1. Szint</text>
-    <text x="122" y="112" font-family="'JetBrains Mono'" font-size="7.5" fill="#64748b" text-anchor="middle">Vezetői OK</text>
-    <polygon points="190,100 205,80 220,100 205,120" fill="#fff8ea" stroke="#df8e0a" stroke-width="2"/>
-    <text x="205" y="104" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#df8e0a" text-anchor="middle">?</text>
-    <path d="M160 100 H190" stroke="#64748b" stroke-width="2"/>
-    <path d="M205 80 V50 H122 V75" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/>
-    <text x="160" y="45" font-family="'JetBrains Mono'" font-size="7" fill="#ef4444" text-anchor="middle">Elutasítva</text>
-    <path d="M220 100 H250" stroke="#1fa876" stroke-width="2"/>
-    <rect x="250" y="75" width="75" height="50" rx="6" fill="#e8f7f1" stroke="#1fa876" stroke-width="1.5"/>
-    <text x="287" y="97" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#15803d" text-anchor="middle">Kifizetés</text>
-    <text x="287" y="112" font-family="'JetBrains Mono'" font-size="7.5" fill="#15803d" text-anchor="middle">SAP Tranzakció</text>
-  </svg>`,
-
-  "TRL 1-9 Technológiai Érettség": `<svg class="modal-diagram-svg" viewBox="0 0 320 200">
-    <defs><linearGradient id="trlGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7655cb"/><stop offset="50%" stop-color="#1d7cd8"/><stop offset="100%" stop-color="#1fa876"/></linearGradient></defs>
-    <rect x="30" y="25" width="260" height="24" rx="6" fill="url(#trlGrad)"/><text x="160" y="41" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="11" text-anchor="middle">TRL 1 —————— TRL 9</text>
-    <rect x="25" y="75" width="80" height="46" rx="6" fill="#f4effe" stroke="#7655cb" stroke-width="1.5"/><text x="65" y="95" fill="#7655cb" font-family="'JetBrains Mono'" font-size="11" font-weight="bold" text-anchor="middle">TRL 1-3</text><text x="65" y="111" fill="#5c6c82" font-size="8.5" text-anchor="middle">Labor Alapelv</text>
-    <rect x="120" y="75" width="80" height="46" rx="6" fill="#edf5fd" stroke="#1d7cd8" stroke-width="1.5"/><text x="160" y="95" fill="#1d7cd8" font-family="'JetBrains Mono'" font-size="11" font-weight="bold" text-anchor="middle">TRL 4-6</text><text x="160" y="111" fill="#5c6c82" font-size="8.5" text-anchor="middle">Prototípus Teszt</text>
-    <rect x="215" y="75" width="80" height="46" rx="6" fill="#e8f7f1" stroke="#1fa876" stroke-width="1.5"/><text x="255" y="95" fill="#1fa876" font-family="'JetBrains Mono'" font-size="11" font-weight="bold" text-anchor="middle">TRL 7-9</text><text x="255" y="111" fill="#5c6c82" font-size="8.5" text-anchor="middle">Ipari Éles Üzem</text>
-  </svg>`,
-
-  "VSM — Értékáram-Térképezés": `<svg class="modal-diagram-svg" viewBox="0 0 320 200">
-    <rect x="20" y="35" width="65" height="42" rx="5" fill="#f8fafc" stroke="#94a3b8"/><text x="52" y="60" fill="#1e293b" font-family="'JetBrains Mono'" font-size="9.5" text-anchor="middle">Kérelem</text>
-    <rect x="125" y="35" width="70" height="42" rx="5" fill="#fff8ea" stroke="#df8e0a"/><text x="160" y="60" fill="#df8e0a" font-family="'JetBrains Mono'" font-size="9.5" text-anchor="middle">Feldolgozás</text>
-    <rect x="235" y="35" width="65" height="42" rx="5" fill="#e8f7f1" stroke="#1fa876"/><text x="267" y="60" fill="#1fa876" font-family="'JetBrains Mono'" font-size="9.5" text-anchor="middle">Átadás</text>
-    <path d="M85 56 H125 M195 56 H235" stroke="#64748b" stroke-width="2"/>
-    <path d="M20 115 H60 V140 H130 V115 H165 V140 H235 V115 H290" stroke="#df8e0a" stroke-width="2.5" fill="none"/>
-    <text x="160" y="160" fill="#ef4444" font-family="'JetBrains Mono'" font-size="9.5" font-weight="bold" text-anchor="middle">Várakozási idők (Muda) felszámolása</text>
-  </svg>`,
-
-  "Process Mining — Folyamatbányászat": `<svg class="modal-diagram-svg" viewBox="0 0 340 200">
-    <rect x="20" y="40" width="80" height="35" rx="5" fill="#f8fafc" stroke="#64748b"/><text x="60" y="62" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#1e293b" text-anchor="middle">Rendelés</text>
-    <path d="M100 57 H140" stroke="#1fa876" stroke-width="4"/><text x="120" y="50" font-family="'JetBrains Mono'" font-size="7.5" font-weight="bold" fill="#1fa876" text-anchor="middle">85%</text>
-    <rect x="140" y="40" width="80" height="35" rx="5" fill="#e8f7f1" stroke="#1fa876"/><text x="180" y="62" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#15803d" text-anchor="middle">Jóváhagyás</text>
-    <path d="M60 75 V130 H140" stroke="#ef4444" stroke-width="2" stroke-dasharray="3 3" fill="none"/>
-    <rect x="140" y="115" width="80" height="40" rx="5" fill="#fef2f2" stroke="#ef4444"/>
-    <text x="180" y="133" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#991b1b" text-anchor="middle">Szűk keresztmetszet</text>
-    <text x="180" y="146" font-family="'JetBrains Mono'" font-size="7" fill="#b91c1c" text-anchor="middle">+14 nap várakozás</text>
-    <path d="M220 57 H260" stroke="#1fa876" stroke-width="4"/><rect x="260" y="40" width="65" height="35" rx="5" fill="#f8fafc" stroke="#64748b"/><text x="292" y="62" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#1e293b" text-anchor="middle">Szállítás</text>
-  </svg>`,
-
-  "Lean Startup (MVP)": `<svg class="modal-diagram-svg" viewBox="0 0 320 200">
-    <circle cx="160" cy="95" r="55" stroke="#df8e0a" stroke-width="2.5" fill="none" stroke-dasharray="5 5"/>
-    <rect x="125" y="16" width="70" height="28" rx="5" fill="#df8e0a"/><text x="160" y="34" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10.5" text-anchor="middle">BUILD (Építs)</text>
-    <rect x="225" y="95" width="75" height="28" rx="5" fill="#df8e0a"/><text x="262" y="113" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10.5" text-anchor="middle">MEASURE (Mérj)</text>
-    <rect x="20" y="95" width="75" height="28" rx="5" fill="#df8e0a"/><text x="57" y="113" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10.5" text-anchor="middle">LEARN (Tanulj)</text>
-    <text x="160" y="98" fill="#142033" font-family="'Manrope'" font-size="16" font-weight="bold" text-anchor="middle">MVP</text>
-  </svg>`,
-
-  "EVM — Értékelemzés": `<svg class="modal-diagram-svg" viewBox="0 0 320 200">
-    <line x1="40" y1="160" x2="280" y2="160" stroke="#64748b" stroke-width="1.5"/>
-    <line x1="40" y1="160" x2="40" y2="30" stroke="#64748b" stroke-width="1.5"/>
-    <path d="M40 160 Q 140 110, 260 40" stroke="#3b82f6" stroke-width="2" fill="none"/>
-    <text x="265" y="42" fill="#3b82f6" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold">PV (Terv)</text>
-    <path d="M40 160 Q 140 130, 200 90" stroke="#1fa876" stroke-width="2.5" fill="none"/>
-    <text x="205" y="93" fill="#1fa876" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold">EV (Érték)</text>
-    <path d="M40 160 Q 140 90, 200 70" stroke="#ef4444" stroke-width="2" stroke-dasharray="3 3" fill="none"/>
-    <text x="205" y="73" fill="#ef4444" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold">AC (Költség)</text>
-    <text x="160" y="185" fill="#1e293b" font-family="'JetBrains Mono'" font-size="9" text-anchor="middle">CPI &lt; 1 = Költségtúllépés · SPI &lt; 1 = Csúszás</text>
-  </svg>`
-};
-
-const visualMethodology = {
-  q1: {
-    title: "Q1 Vízesés (Waterfall) Folyamat & Alapelvek",
-    badge: "Q1 STANDARD // LINEÁRIS ÉS DETERMINISZTIKUS",
-    desc: "A Vízesés modell a jól ismert, alacsony bizonytalanságú projektek alapvető mechanizmusa. A követelmények a projekt elején kőbe vannak vésve.",
-    how: "<strong>Alapelvek:</strong><br>1. Szekvenciális fázisok (Követelmény ➔ Tervezés ➔ Építés ➔ Teszt ➔ Átadás).<br>2. Szigorú fáziszárás és dokumentáció.<br>3. A változtatás költsége exponenciálisan nő az idő előrehaladtával.",
-    quote: "„Először tervezzük meg tökéletesen, és utána hajtsuk végre hiba nélkül.”",
-    svg: toolSvgs["Gantt & CPM — Kritikus Út"]
-  },
-  q2: {
-    title: "Q2 Stage-Gate (K+F Kapuk) Folyamat & Alapelvek",
-    badge: "Q2 INNOVÁCIÓ // TUDOMÁNYOS FEASIBILITY",
-    desc: "A Stage-Gate rendszer a kutatás-fejlesztési bizonytalanság kezelésére szolgál. A folyamat különálló kutatási szakaszokra és szigorú döntési kapukra oszlik.",
-    how: "<strong>Alapelvek:</strong><br>1. Minden kapunál négy döntés lehetséges: Go, Kill, Hold, Recycle.<br>2. A kapuőrök objektív mérési adatok és TRL szintek alapján döntenek.<br>3. A korai elbukás (Kill) nem kudarc, hanem megtakarított tőke.",
-    quote: "„Ne építs gyárat egy olyan elméletre, amit még nem igazoltál a laboratóriumban!”",
-    svg: toolSvgs["TRL 1-9 Technológiai Érettség"]
-  },
-  q3: {
-    title: "Q3 Lean & Design Thinking Folyamat & Alapelvek",
-    badge: "Q3 ADAPTÁCIÓ // EMBERKÖZPONTÚ ÉS ÉRTÉKÁRAM-VEZÉRELT",
-    desc: "A Lean és a Design Thinking kombinációja feltárja a valós, rejtett felhasználói igényeket, miközben kiirtja a folyamatokban keletkező pazarlást (Muda).",
-    how: "<strong>Alapelvek:</strong><br>1. Double Diamond: Kétszer nyitunk és zárunk (Valódi probléma feltárása ➔ Valódi megoldás megépítése).<br>2. VSM: A megrendeléstől az átadásig tartó értékáram optimalizálása.<br>3. MVP és azonnali piaci tesztelés: ne fejlesszünk éveken át a sötétben.",
-    quote: "„Amiért a vevő nem fizet szívesen, az veszteség: vágd le a folyamatról!”",
-    svg: toolSvgs["Design Thinking — Kettős Gyémánt"]
-  },
-  q4: {
-    title: "Q4 Deep Agile Folyamat & Alapelvek",
-    badge: "Q4 FELFEDEZÉS // EMPIRIKUS ÉS ADAPTÍV",
-    desc: "A Scrum és az extrém agilitás az ismeretlen területek meghódításának eszköze, ahol sem a cél, sem a technológiai megvalósítás nem adott előre.",
-    how: "<strong>Alapelvek:</strong><br>1. Rövid (1-2 hetes) sprintek és folyamatosan szállított működő növekmény.<br>2. Autonóm, keresztfunkcionális csapatok (Squadok) közvetlen ügyféli visszacsatolással.<br>3. Empirikus folyamatszabályozás: Átláthatóság, Vizsgálat, Alkalmazkodás.",
-    quote: "„A ködben a terv önámítás: csak az azonnali visszacsatolás és a gyors tanulás tart életben.”",
-    svg: toolSvgs["Lean Startup (MVP)"]
+  // 1. PÉNZÜGY, KÖLTSÉG & METRIKA (EVM, ROI, OPEX, CAPEX, CAC, LTV, Burn Rate)
+  if (k.includes('evm') || k.includes('költség') || k.includes('opex') || k.includes('capex') || k.includes('tőke') || k.includes('burn') || k.includes('cac') || k.includes('egység')) {
+    return `<svg class="modal-diagram-svg" viewBox="0 0 340 200">
+      <line x1="30" y1="160" x2="310" y2="160" stroke="#94a3b8" stroke-width="1.5"/>
+      <line x1="30" y1="160" x2="30" y2="30" stroke="#94a3b8" stroke-width="1.5"/>
+      <path d="M30 160 Q 140 120, 290 40" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+      <path d="M30 160 Q 140 140, 240 85" stroke="#10b981" stroke-width="3" fill="none"/>
+      <circle cx="240" cy="85" r="5" fill="#10b981"/>
+      <text x="250" y="88" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#10b981">Validált Megtérülés</text>
+      <text x="295" y="42" font-family="'JetBrains Mono'" font-size="8" fill="#3b82f6">Költségkeret</text>
+      <rect x="50" y="172" width="240" height="20" rx="4" fill="#f1f5f9"/>
+      <text x="170" y="186" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#334155" text-anchor="middle">PÉNZÜGYI KONTROLL · KOCKÁZATALAPÚ ALLOKÁCIÓ</text>
+    </svg>`;
   }
-};
+
+  // 2. SZERZŐDÉSEK, JOG & MEGFELELÉS (Fixed Price, SLA, SOW, IP, Sandbox, T&M, GDPR, NDA)
+  if (k.includes('szerződés') || k.includes('sla') || k.includes('sow') || k.includes('jog') || k.includes('t&m') || k.includes('ip') || k.includes('sandbox') || k.includes('nda') || k.includes('gdpr') || k.includes('kötbér')) {
+    return `<svg class="modal-diagram-svg" viewBox="0 0 340 200">
+      <rect x="30" y="35" width="120" height="130" rx="8" fill="#fff" stroke="#64748b" stroke-width="2"/>
+      <path d="M50 60 H130 M50 78 H130 M50 96 H110 M50 114 H120" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="120" cy="135" r="14" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="2"/>
+      <text x="120" y="139" font-family="'JetBrains Mono'" font-size="11" text-anchor="middle" fill="#d97706">§</text>
+      <path d="M165 100 H195" stroke="#10b981" stroke-width="3"/>
+      <polygon points="195,100 185,94 185,106" fill="#10b981"/>
+      <rect x="205" y="55" width="105" height="90" rx="8" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+      <text x="257" y="85" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">KOCKÁZATI</text>
+      <text x="257" y="100" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">VÉDŐHÁLÓ</text>
+      <text x="257" y="125" font-family="'JetBrains Mono'" font-size="8" fill="#166534" text-anchor="middle">Kétoldalú Garancia</text>
+    </svg>`;
+  }
+
+  // 3. HIBAKULTÚRA, CSAPDÁK & "ÍGY SZOKTUK" (RCA, nulla hiba, bürokrácia, kalapács, dogma)
+  if (k.includes('hiba') || k.includes('rca') || k.includes('csapda') || k.includes('dogma') || k.includes('szoktuk') || k.includes('méreg') || k.includes('túlmérnökölés') || k.includes('vakság') || k.includes('veszély')) {
+    return `<svg class="modal-diagram-svg" viewBox="0 0 340 200">
+      <circle cx="80" cy="100" r="45" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+      <text x="80" y="95" font-family="'JetBrains Mono'" font-size="16" text-anchor="middle" fill="#ef4444">⚠️</text>
+      <text x="80" y="118" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#991b1b" text-anchor="middle">Eltérés / Hiba</text>
+      <path d="M135 100 H175" stroke="#64748b" stroke-width="2"/>
+      <rect x="185" y="60" width="125" height="80" rx="8" fill="#fff" stroke="#3b82f6" stroke-width="2"/>
+      <text x="247" y="88" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Gyökérok (RCA)</text>
+      <text x="247" y="106" font-family="'JetBrains Mono'" font-size="8" fill="#475569" text-anchor="middle">➔ Tanulási Ciklus</text>
+      <text x="247" y="124" font-family="'JetBrains Mono'" font-size="8" fill="#10b981" font-weight="bold" text-anchor="middle">➔ Rendszerkorrekció</text>
+    </svg>`;
+  }
+
+  // 4. VEZETÉS, EMBER & SZERVEZET (PO, Scrum Master, coach, kultúra, hierarchia, siló, squad)
+  if (k.includes('vezető') || k.includes('csapat') || k.includes('squad') || k.includes('coach') || k.includes('owner') || k.includes('szolga') || k.includes('mentor') || k.includes('ellenőr') || k.includes('kutató') || k.includes('felfedező') || k.includes('karakter') || k.includes('attitűd')) {
+    return `<svg class="modal-diagram-svg" viewBox="0 0 340 200">
+      <circle cx="170" cy="65" r="24" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+      <text x="170" y="72" font-size="18" text-anchor="middle">👤</text>
+      <path d="M170 95 V125 M110 125 H230 M110 125 V145 M230 125 V145" stroke="#64748b" stroke-width="2" fill="none"/>
+      <rect x="75" y="145" width="70" height="30" rx="5" fill="#f8fafc" stroke="#94a3b8"/>
+      <text x="110" y="164" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#334155" text-anchor="middle">Kompetencia</text>
+      <rect x="195" y="145" width="70" height="30" rx="5" fill="#f8fafc" stroke="#94a3b8"/>
+      <text x="230" y="164" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#334155" text-anchor="middle">Felelősség</text>
+      <text x="170" y="22" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1e293b" text-anchor="middle">SZERVEZETI SZEREP &amp; KORMÁNYZÁS</text>
+    </svg>`;
+  }
+
+  // 5. MÓDSZERTAN, FOLYAMAT & TECHNOLÓGIA ALAPÉRTELMEZETT (Iteráció, folyamatszalag)
+  return `<svg class="modal-diagram-svg" viewBox="0 0 340 200">
+    <rect x="25" y="75" width="75" height="50" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+    <text x="62" y="98" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#1e293b" text-anchor="middle">Input</text>
+    <text x="62" y="112" font-family="'JetBrains Mono'" font-size="7.5" fill="#64748b" text-anchor="middle">Követelmény</text>
+    
+    <path d="M100 100 H130" stroke="#3b82f6" stroke-width="2"/>
+    
+    <rect x="130" y="65" width="80" height="70" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+    <text x="170" y="95" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#1e3a8a" text-anchor="middle">FOLYAMAT</text>
+    <text x="170" y="112" font-family="'JetBrains Mono'" font-size="7.5" fill="#2563eb" text-anchor="middle">Szabályozott Lépés</text>
+    
+    <path d="M210 100 H240" stroke="#10b981" stroke-width="2"/>
+    
+    <rect x="240" y="75" width="75" height="50" rx="6" fill="#f0fdf4" stroke="#10b981" stroke-width="1.5"/>
+    <text x="277" y="98" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#166534" text-anchor="middle">Output</text>
+    <text x="277" y="112" font-family="'JetBrains Mono'" font-size="7.5" fill="#15803d" text-anchor="middle">Igazolt Érték</text>
+    
+    <text x="170" y="170" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#64748b" text-anchor="middle">STANDARD OPERÁCIÓS LÉPÉS</text>
+  </svg>`;
+}
+
+// BÁRMELY CÍMKÉRE VALÓ KATTINTÁST KISZOLGÁLÓ VEZETŐI TUDÁSBÁZIS
+function getToolDetails(key) {
+  // 1. Ha szerepel az explicit szótárban, visszaadjuk
+  if (toolDictionary[key]) {
+    const item = toolDictionary[key];
+    return {
+      name: item.name,
+      badge: item.badge,
+      desc: item.desc,
+      how: item.how,
+      quote: item.quote,
+      svg: toolSvgs[key] || generateSemanticSVG(key)
+    };
+  }
+
+  // 2. Ha nincs az explicit listában, szemantikusan felépítjük
+  const cleanName = key;
+  return {
+    name: cleanName,
+    badge: "STRATÉGIAI DÖNTÉSTÁMOGATÓ ESZKÖZ",
+    desc: `A(z) „${cleanName}” az adott negyed bizonytalansági koordinátáihoz igazított vezetői eljárásrend. Biztosítja, hogy a szervezet ne dogmatikus elvek, hanem valós kockázatok és feladatérettség szerint járjon el.`,
+    how: `<strong>Gyakorlati alkalmazás:</strong><br>1. Azonosítsuk a technológiai és piaci bizonytalanság szintjét.<br>2. Érvényesítsük a megfelelő fegyelmi és számonkérési szabályrendszert.<br>3. Zárjuk ki a jogosulatlan átugrásokat az elszámolásban és a kivitelezésben.`,
+    quote: `„A megfelelő kormányzási eszköz megválasztása a sikeres és költséghatékony vállalati működés garanciája.”`,
+    svg: generateSemanticSVG(key)
+  };
+}
 
 let currentDim = 0;
 let isIntroMode = false;
@@ -1196,7 +910,7 @@ function render() {
     document.getElementById('dimName').textContent = d.name;
     document.getElementById('dimTitle').textContent = d.title;
     document.getElementById('dimDesc').textContent = d.desc;
-    meta.textContent = `12 dimenziós döntési modell · Kattints a címkékre az illusztrált ábrákhoz!`;
+    meta.textContent = `12 dimenziós döntési modell · Kattints bármelyik címkére az egyedi ábrához!`;
 
     ['q1', 'q2', 'q3', 'q4'].forEach(q => {
       const card = document.getElementById(`card-${q}`);
@@ -1344,21 +1058,17 @@ function openVisualModal(e, q) {
   document.getElementById('toolModal').style.display = 'flex';
 }
 
+// BÁRMELYIK CÍMKE KATTINTÁSAKOR EZ HÍVÓDIK MEG
 function openTool(e, key) {
   e.stopPropagation();
-  const tool = toolDictionary[key] || {
-    name: key,
-    badge: 'STRATÉGIAI VEZETŐI FOGALOM',
-    desc: `A(z) „${key}” döntéstámogató szempont, amely a koordinátarendszer adott bizonytalansági szintjén védi meg a vállalatot a hibás kormányzástól.`,
-    how: 'Alkalmazás: Vizsgáljuk meg a cél és a technológia érettségi szintjét, és rendeljük hozzá a megfelelő elszámolási és irányítási szabályokat.',
-    quote: '„Nem a módszertan vallása, hanem a feladat bizonytalansága határozza meg a helyes irányt.”'
-  };
+  const tool = getToolDetails(key);
+  
   document.getElementById('mTitle').textContent = tool.name;
   document.getElementById('mBadge').textContent = tool.badge;
-  document.getElementById('mDesc').textContent = tool.desc;
-  document.getElementById('mHow').textContent = tool.how;
-  document.getElementById('mQuote').textContent = tool.quote;
-  document.getElementById('mSvgContainer').innerHTML = toolSvgs[key] || `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><rect x="35" y="32" width="250" height="136" rx="20" fill="#f6f9fc" stroke="#ced9e5"/><circle cx="160" cy="88" r="28" fill="#edf5fd" stroke="#1d7cd8"/><text x="160" y="96" text-anchor="middle" font-size="24" fill="#1d7cd8">⚙️</text><text x="160" y="137" text-anchor="middle" font-family="Manrope" font-weight="700" font-size="12" fill="#142033">${key}</text></svg>`;
+  document.getElementById('mDesc').innerHTML = tool.desc;
+  document.getElementById('mHow').innerHTML = tool.how;
+  document.getElementById('mQuote').innerHTML = tool.quote;
+  document.getElementById('mSvgContainer').innerHTML = tool.svg;
   document.getElementById('toolModal').style.display = 'flex';
 }
 
