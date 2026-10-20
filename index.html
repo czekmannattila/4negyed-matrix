@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stratégiai Döntési Mátrix — Executive C-Level Edition (v30 Context-Aware)</title>
+<title>Stratégiai Döntési Mátrix — Executive C-Level Edition</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -11,30 +11,25 @@
 :root{
   --bg:#f4f6f9; --paper:#ffffff; --paper-2:#fbfcfe; --ink:#142033; --muted:#5c6c82;
   --line:#d8e1eb; --line-2:#c7d3e2; --navy:#122a42;
-  --q1:#1fa876; --q1s:#e8f7f1;
-  --q2:#1d7cd8; --q2s:#edf5fd;
-  --q3:#df8e0a; --q3s:#fff8ea;
-  --q4:#7655cb; --q4s:#f4effe;
-  --shadow:0 16px 44px rgba(20,32,51,.08);
-  --shadow2:0 6px 20px rgba(20,32,51,.07);
+  --q1:#1fa876; --q1s:#e8f7f1; --q2:#1d7cd8; --q2s:#edf5fd;
+  --q3:#df8e0a; --q3s:#fff8ea; --q4:#7655cb; --q4s:#f4effe;
+  --shadow:0 16px 44px rgba(20,32,51,.08); --shadow2:0 6px 20px rgba(20,32,51,.07);
 }
 *{box-sizing:border-box}
 html,body{width:100%;height:100%;margin:0;overflow:hidden}
 body{
   font-family:Inter,system-ui,sans-serif;color:var(--ink);
-  background:
-    radial-gradient(circle at 6% 4%, rgba(29,124,216,.07), transparent 28%),
-    radial-gradient(circle at 94% 96%, rgba(118,85,203,.07), transparent 28%),
-    linear-gradient(180deg,#f8fafc 0%,#f1f4f8 100%);
+  background:radial-gradient(circle at 6% 4%, rgba(29,124,216,.07), transparent 28%),
+             radial-gradient(circle at 94% 96%, rgba(118,85,203,.07), transparent 28%),
+             linear-gradient(180deg,#f8fafc 0%,#f1f4f8 100%);
   user-select:none;
 }
 button{font:inherit}
-.app{height:100vh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:8px;padding:10px 16px 10px;transition:all .25s ease}
+.app{height:100vh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:8px;padding:10px 16px 10px}
 
-/* BLACKOUT */
 #trueBlackoutOverlay {
-  position: fixed; inset: 0; background: #000000 !important;
-  z-index: 999999; display: none; align-items: center; justify-content: center; cursor: pointer;
+  position: fixed; inset: 0; background: #000 !important; z-index: 999999;
+  display: none; align-items: center; justify-content: center; cursor: pointer;
 }
 .blackout-tag {
   color: #334155; font-family: 'JetBrains Mono', monospace; font-size: 11px;
@@ -44,25 +39,21 @@ button{font:inherit}
 
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:36px}
 .brand{display:flex;align-items:center;gap:10px;min-width:0}
-.brandmark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#13304e,#24527a);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Manrope,sans-serif;font-weight:800;font-size:12px;box-shadow:0 4px 12px rgba(18,42,66,.2)}
-.brandcopy{min-width:0}
+.brandmark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#13304e,#24527a);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Manrope,sans-serif;font-weight:800;font-size:12px}
 .brandname{font-family:Manrope,sans-serif;font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#122a42;white-space:nowrap}
 .brandsub{font-size:10px;color:var(--muted)}
 .controls{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.iconbtn,.navbtn{border:1px solid var(--line);background:rgba(255,255,255,.9);color:var(--ink);height:30px;border-radius:7px;cursor:pointer;transition:.16s;display:inline-flex;align-items:center;justify-content:center;gap:5px;font-size:10.5px;font-weight:700;padding:0 8px;box-shadow:0 2px 5px rgba(20,32,51,.04)}
-.iconbtn:hover,.navbtn:hover{background:#fff;border-color:var(--line-2);transform:translateY(-1px);box-shadow:var(--shadow2)}
+.iconbtn,.navbtn{border:1px solid var(--line);background:rgba(255,255,255,.9);color:var(--ink);height:30px;border-radius:7px;cursor:pointer;transition:.16s;display:inline-flex;align-items:center;justify-content:center;gap:5px;font-size:10.5px;font-weight:700;padding:0 8px}
+.iconbtn:hover,.navbtn:hover{background:#fff;border-color:var(--line-2);transform:translateY(-1px)}
 .navbtn.primary{background:#122a42;color:#fff;border-color:#122a42}
-.navbtn.primary:hover{background:#1c4266}
-.iconbtn.active{background:#122a42;color:#fff;border-color:#122a42}
-.iconbtn.active-warn{background:#c2410c;color:#fff;border-color:#c2410c}
 .iconbtn.special{background:rgba(118,85,203,0.12);border-color:rgba(118,85,203,0.3);color:#6b21a8}
-.iconbtn.special:hover{background:rgba(118,85,203,0.22);border-color:#7655cb}
+.iconbtn.active-warn{background:#c2410c;color:#fff;border-color:#c2410c}
 
-.dimension-head{background:rgba(255,255,255,.9);border:1px solid rgba(199,211,226,.9);border-radius:12px;box-shadow:var(--shadow2);padding:8px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;backdrop-filter:blur(8px)}
+.dimension-head{background:rgba(255,255,255,.9);border:1px solid rgba(199,211,226,.9);border-radius:12px;box-shadow:var(--shadow2);padding:8px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}
 .dim-kicker{display:flex;align-items:center;gap:6px;margin-bottom:2px}
 .dim-number{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;color:#2c5277;background:#edf3f9;border:1px solid #d4e0ec;border-radius:999px;padding:2px 6px}
 .dim-name{font-size:9.5px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:#647890}
-.dimension-head h1{margin:0;font-family:Manrope,sans-serif;font-size:clamp(16px,1.4vw,21px);line-height:1.15;letter-spacing:-.03em;color:#112235}
+.dimension-head h1{margin:0;font-family:Manrope,sans-serif;font-size:clamp(16px,1.4vw,21px);line-height:1.15;color:#112235}
 .dimension-head p{margin:2px 0 0;font-size:11px;line-height:1.35;color:var(--muted);max-width:920px}
 .header-meta{font-size:10px;color:#6c7f96;font-weight:700;text-align:right}
 
@@ -71,9 +62,9 @@ button{font:inherit}
 .matrix-frame:before,.matrix-frame:after{content:"";position:absolute;z-index:1;background:#d4dde7}
 .matrix-frame:before{top:12px;bottom:12px;width:1.5px;left:50%;transform:translateX(-50%)}
 .matrix-frame:after{left:12px;right:12px;height:1.5px;top:50%;transform:translateY(-50%)}
-.center-dot{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid #8ca2ba;box-shadow:0 0 0 4px rgba(255,255,255,.9)}
+.center-dot{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid #8ca2ba}
 
-.axis{position:absolute;z-index:3;font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#4f647c;background:rgba(255,255,255,.96);padding:3px 9px;border:1px solid #d4dfea;border-radius:999px;box-shadow:0 2px 6px rgba(20,32,51,.06);white-space:nowrap}
+.axis{position:absolute;z-index:3;font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#4f647c;background:rgba(255,255,255,.96);padding:3px 9px;border:1px solid #d4dfea;border-radius:999px;white-space:nowrap}
 .axis.top{top:5px;left:50%;transform:translateX(-50%)}
 .axis.bottom{bottom:5px;left:50%;transform:translateX(-50%)}
 .axis.left{left:8px;top:50%;transform:translateY(-50%)}
@@ -87,9 +78,8 @@ button{font:inherit}
 
 .grid{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px 14px}
 
-.card{--accent:#1d7cd8;--soft:#edf5fd;min-width:0;min-height:0;background:linear-gradient(180deg,#fff 0%,#fbfcfe 100%);border:1px solid #d9e2eb;border-radius:14px;box-shadow:0 4px 14px rgba(20,32,51,.04);padding:10px 12px 8px;display:flex;flex-direction:column;gap:5px;position:relative;overflow:hidden;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,opacity .25s ease}
+.card{--accent:#1d7cd8;--soft:#edf5fd;min-width:0;min-height:0;background:linear-gradient(180deg,#fff 0%,#fbfcfe 100%);border:1px solid #d9e2eb;border-radius:14px;box-shadow:0 4px 14px rgba(20,32,51,.04);padding:10px 12px 8px;display:flex;flex-direction:column;gap:5px;position:relative;overflow:hidden;cursor:pointer;transition:all .2s ease}
 .card:before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--accent)}
-.card:after{content:"";position:absolute;width:130px;height:130px;border-radius:50%;right:-40px;top:-60px;background:radial-gradient(circle,var(--soft) 0 40%,transparent 72%);opacity:.9;pointer-events:none}
 .card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,32,51,.08);border-color:#c8d4e2}
 .card.q1{--accent:var(--q1);--soft:var(--q1s)} .card.q2{--accent:var(--q2);--soft:var(--q2s)} .card.q3{--accent:var(--q3);--soft:var(--q3s)} .card.q4{--accent:var(--q4);--soft:var(--q4s)}
 
@@ -98,23 +88,23 @@ button{font:inherit}
 .qmeta{display:flex;align-items:center;gap:4px;margin-bottom:2px}
 .qcode{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#fff;background:var(--accent);padding:2px 5px;border-radius:999px}
 .qmode{font-size:8.5px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--accent)}
-.qtitle{font-family:Manrope,sans-serif;font-size:clamp(13px,1vw,16.5px);font-weight:800;letter-spacing:-.025em;line-height:1.15;color:#132437}
+.qtitle{font-family:Manrope,sans-serif;font-size:clamp(13px,1vw,16.5px);font-weight:800;color:#132437}
 
-.art{width:62px;height:38px;flex:0 0 62px;color:var(--accent);opacity:.95;position:relative}
+.art{width:62px;height:38px;flex:0 0 62px;color:var(--accent);opacity:.95}
 .art svg{width:100%;height:100%;display:block}
 
-.profile{font-size:9.5px;color:#6c7d94;font-weight:600;position:relative;z-index:1}
-.focus{font-size:clamp(11.5px,.82vw,13.8px);line-height:1.25;font-weight:800;color:#16283d;position:relative;z-index:1}
-.desc{font-size:clamp(10px,.7vw,12px);line-height:1.38;color:var(--muted);position:relative;z-index:1;flex:1}
+.profile{font-size:9.5px;color:#6c7d94;font-weight:600}
+.focus{font-size:clamp(11.5px,.82vw,13.8px);line-height:1.25;font-weight:800;color:#16283d}
+.desc{font-size:clamp(10px,.7vw,12px);line-height:1.38;color:var(--muted);flex:1}
 
-.footer{display:flex;align-items:center;justify-content:space-between;gap:6px;position:relative;z-index:2;margin-top:auto;padding-top:2px}
+.footer{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:auto;padding-top:2px}
 .tags{display:flex;flex-wrap:wrap;gap:4px;min-width:0;position:relative;z-index:5}
 .tag{border:1px solid #d8e2eb;background:#f5f8fb;color:#45586f;border-radius:999px;padding:3px 7px;font-size:8.5px;font-weight:700;white-space:nowrap;cursor:pointer;transition:.14s}
 .tag:hover{background:#fff;border-color:#122a42;color:#122a42;transform:translateY(-1px);box-shadow:0 2px 5px rgba(20,32,51,.12)}
 
 .actions-row{display:flex;align-items:center;gap:4px;position:relative;z-index:5}
 .processbtn{border:1px solid #cbd5e1;background:#fff;color:#334155;border-radius:999px;padding:2px 7px;font-size:9px;font-weight:800;cursor:pointer;transition:.16s;white-space:nowrap}
-.processbtn:hover{background:#f1f5f9;border-color:#94a3b8;transform:translateY(-1px)}
+.processbtn:hover{background:#f1f5f9;border-color:#94a3b8}
 .detailcue{font-size:9px;font-weight:800;color:var(--accent);white-space:nowrap}
 
 body.mode-intro .card.intro-unrevealed{background:linear-gradient(180deg,#fafbfd 0%,#f1f4f8 100%);border-style:dashed;border-color:#cbd5e1;box-shadow:none}
@@ -125,7 +115,7 @@ body.mode-intro .card.intro-unrevealed .desc,
 body.mode-intro .card.intro-unrevealed .footer{display:none !important}
 body.mode-intro .card.intro-unrevealed .profile{font-size:11.5px;color:#8fa1b7;font-style:italic;margin:auto;text-align:center;font-weight:600}
 
-body.mode-intro .card.intro-revealed{background:linear-gradient(180deg,#fff 0%,#fbfcfe 100%);border-style:solid;border-color:var(--accent);box-shadow:0 8px 22px rgba(20,32,51,.08);animation:popCard .3s cubic-bezier(0.16,1,0.3,1)}
+body.mode-intro .card.intro-revealed{background:linear-gradient(180deg,#fff 0%,#fbfcfe 100%);border-style:solid;border-color:var(--accent)}
 body.mode-intro .card.intro-revealed .focus,
 body.mode-intro .card.intro-revealed .desc,
 body.mode-intro .card.intro-revealed .footer{display:none !important}
@@ -146,9 +136,9 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
 .card.expanded .closefocus{display:inline-flex;align-items:center;gap:4px}
 
 .bottombar{display:grid;grid-template-columns:repeat(6, 1fr);grid-template-rows:auto auto;gap:5px;background:rgba(255,255,255,.92);border:1px solid rgba(199,211,226,.9);border-radius:12px;padding:6px 8px;box-shadow:var(--shadow2);z-index:5}
-.dim-pill{border:1px solid var(--line);background:#f6f9fc;color:#384d66;border-radius:6px;padding:4px 6px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.15s;display:flex;align-items:center;gap:5px;justify-content:flex-start;overflow:hidden;text-overflow:ellipsis}
-.dim-pill:hover{background:#fff;border-color:var(--line-2);color:#122a42;transform:translateY(-1px)}
-.dim-pill.active{background:#122a42;color:#fff;border-color:#122a42;box-shadow:0 2px 6px rgba(18,42,66,.25)}
+.dim-pill{border:1px solid var(--line);background:#f6f9fc;color:#384d66;border-radius:6px;padding:4px 6px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.15s;display:flex;align-items:center;gap:5px;overflow:hidden;text-overflow:ellipsis}
+.dim-pill:hover{background:#fff;border-color:var(--line-2);color:#122a42}
+.dim-pill.active{background:#122a42;color:#fff;border-color:#122a42}
 .dim-pill-idx{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;color:var(--accent, #1d7cd8);background:rgba(255,255,255,0.7);padding:1px 4px;border-radius:4px}
 .dim-pill.active .dim-pill-idx{color:#fff;background:rgba(255,255,255,0.2)}
 .dim-pill-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -157,7 +147,7 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
 .modal{width:min(980px,94vw);max-height:88vh;background:#fff;border:1px solid #d4dfea;border-radius:18px;box-shadow:0 30px 80px rgba(14,26,40,.24);overflow:hidden;display:flex;flex-direction:column}
 .modalhead{padding:12px 18px;border-bottom:1px solid #e2e8ee;display:flex;justify-content:space-between;gap:10px;align-items:center;background:linear-gradient(180deg,#fff,#fafbfd)}
 .modalkicker{font-size:9.5px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:#6c7f96}
-.modaltitle{font-family:Manrope,sans-serif;font-size:18px;font-weight:800;letter-spacing:-.025em;color:#122336;margin-top:2px}
+.modaltitle{font-family:Manrope,sans-serif;font-size:18px;font-weight:800;color:#122336}
 .modalclose{width:30px;height:30px;border-radius:8px;border:1px solid #d4dfea;background:#fff;color:#273d54;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
 .modalclose:hover{background:#f1f5f9;color:#0f172a}
 .modalbody{padding:16px 18px;display:grid;grid-template-columns:1.05fr .95fr;gap:14px;overflow:auto}
@@ -172,7 +162,6 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
 .script-block{background:#fbfcfe;border:1px solid #e2e8f0;border-left:4px solid #122a42;border-radius:10px;padding:12px 16px}
 .script-time{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;color:#1d7cd8;text-transform:uppercase;margin-bottom:2px}
 .script-h3{font-family:Manrope,sans-serif;font-size:14px;font-weight:800;color:#112235;margin:0 0 6px 0}
-.script-action{background:#f1f5f9;border-radius:6px;padding:4px 8px;font-size:10.5px;font-weight:700;color:#0f172a;margin-bottom:8px;display:inline-block}
 .script-speech{font-size:12px;line-height:1.55;color:#334155;font-style:italic;background:#fff;border-left:2px solid #cbd5e1;padding:8px 12px;border-radius:0 6px 6px 0}
 </style>
 </head>
@@ -182,7 +171,7 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
   <div class="blackout-tag">Vezetői Fókusz Mód · Nyomj [B]-t a visszatéréshez</div>
 </div>
 
-<div class="app" id="mainAppContainer">
+<div class="app">
   <div class="topbar">
     <div class="brand">
       <div class="brandmark">2×2</div>
@@ -213,7 +202,7 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
   </section>
 
   <section class="stage" id="stage">
-    <div class="matrix-frame" id="matrixFrame">
+    <div class="matrix-frame">
       <div class="axis top">▲ Ismert probléma</div>
       <div class="axis bottom">▼ Nem ismert probléma</div>
       <div class="axis left">◄ Nem ismert megoldás</div>
@@ -327,7 +316,6 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
   <footer class="bottombar" id="bottomBar"></footer>
 </div>
 
-<!-- Interaktív Modal -->
 <div class="modal-overlay" id="toolModal" onclick="closeToolModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modalhead">
@@ -350,7 +338,6 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
   </div>
 </div>
 
-<!-- KÉP-MODAL -->
 <div class="modal-overlay" id="imageModal" onclick="closeImageModal(event)">
   <div class="modal" style="width:min(1100px, 95vw); max-height:92vh;" onclick="event.stopPropagation()">
     <div class="modalhead">
@@ -362,14 +349,13 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
     </div>
     <div class="modalbody" style="grid-template-columns: 1.2fr 0.8fr; align-items:center;">
       <div style="background:#0f172a; border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center; max-height:70vh;">
-        <img id="modalImgDisplay" src="" style="width:100%; height:auto; max-height:70vh; object-fit:contain; display:block;" onerror="handleImageError(this)" alt="Vizuális szemléltetés">
+        <img id="modalImgDisplay" src="" style="width:100%; height:auto; max-height:70vh; object-fit:contain; display:block;" onerror="this.style.display='none'" alt="Vizuális szemléltetés">
       </div>
       <div class="modalcopy" id="imgModalCopy"></div>
     </div>
   </div>
 </div>
 
-<!-- CSAPATSTRUKTÚRA MODAL -->
 <div class="modal-overlay" id="teamsModal" onclick="closeTeamsModal(event)">
   <div class="modal" style="width:min(1120px, 96vw); max-height:92vh;" onclick="event.stopPropagation()">
     <div class="modalhead">
@@ -381,7 +367,7 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
     </div>
     <div class="modalbody" style="grid-template-columns: 1.25fr 0.75fr; align-items:center;">
       <div style="background:#0f172a; border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center; max-height:70vh;">
-        <img src="teams_waterfall_agile.jpg" style="width:100%; height:auto; max-height:70vh; object-fit:contain; display:block;" onerror="handleTeamsImageError(this)" alt="Szervezeti struktúra">
+        <img src="teams_waterfall_agile.jpg" style="width:100%; height:auto; max-height:70vh; object-fit:contain; display:block;" onerror="this.style.display='none'" alt="Szervezeti struktúra">
       </div>
       <div class="modalcopy">
         <div class="copybox">
@@ -397,7 +383,6 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
   </div>
 </div>
 
-<!-- ELŐADÓI FORGATÓKÖNYV MODAL -->
 <div class="modal-overlay" id="scriptModal" onclick="closeScriptModal(event)">
   <div class="modal" style="width:min(940px, 95vw); max-height:90vh;" onclick="event.stopPropagation()">
     <div class="modalhead">
@@ -412,7 +397,6 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
         <div class="script-block">
           <div class="script-time">00:00 – 04:00 | 1. Blokk: Nyitány</div>
           <h3 class="script-h3">A 60%-os Projektkudarc Valódi Oka</h3>
-          <span class="script-action">Nyomj [I]-t az Intro módhoz</span>
           <div class="script-speech">„Tisztelt Igazgatóság! Nincs eleve rossz módszertan — csak rossz koordináta-választás létezik. Ma felrajzoljuk a döntések 4 külön világát a bizonytalanság tengelyein.”</div>
         </div>
       </div>
@@ -420,44 +404,7 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
   </div>
 </div>
 
-<script>
-// VEKTOROS GRAFIKAI MOTOR — 14 KÜLÖNBÖZŐ ARCHETÍPUS
-const svgLibrary = {
-  wbs: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><rect x="95" y="10" width="130" height="34" rx="6" fill="#1fa876" fill-opacity="0.25" stroke="#1fa876" stroke-width="2"/><text x="160" y="32" fill="#142033" font-family="'JetBrains Mono'" font-size="11" font-weight="bold" text-anchor="middle">PROJEKT (100%)</text><path d="M160 44 V70 M45 70 H275 M45 70 V90 M160 70 V90 M275 70 V90" stroke="#1fa876" stroke-width="2" fill="none"/><rect x="10" y="90" width="70" height="30" rx="5" fill="#edf3f9" stroke="#7b94ad"/><text x="45" y="109" fill="#142033" font-family="'JetBrains Mono'" font-size="9" text-anchor="middle">WBS 1.1</text><rect x="125" y="90" width="70" height="30" rx="5" fill="#edf3f9" stroke="#7b94ad"/><text x="160" y="109" fill="#142033" font-family="'JetBrains Mono'" font-size="9" text-anchor="middle">WBS 1.2</text><rect x="240" y="90" width="70" height="30" rx="5" fill="#edf3f9" stroke="#7b94ad"/><text x="275" y="109" fill="#142033" font-family="'JetBrains Mono'" font-size="9" text-anchor="middle">WBS 1.3</text><path d="M45 120 V140 M160 120 V140 M275 120 V140" stroke="#7b94ad" stroke-dasharray="3 3"/><rect x="10" y="140" width="70" height="26" rx="4" fill="#fff" stroke="#1fa876"/><text x="45" y="157" fill="#1fa876" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" text-anchor="middle">Munkacsomag</text><rect x="125" y="140" width="70" height="26" rx="4" fill="#fff" stroke="#1fa876"/><text x="160" y="157" fill="#1fa876" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" text-anchor="middle">Munkacsomag</text><rect x="240" y="140" width="70" height="26" rx="4" fill="#fff" stroke="#1fa876"/><text x="275" y="157" fill="#1fa876" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" text-anchor="middle">Munkacsomag</text></svg>`,
-  gantt: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><line x1="60" y1="25" x2="300" y2="25" stroke="#cbd5e1" stroke-width="1.5"/><text x="90" y="18" fill="#64748b" font-size="9" font-family="'JetBrains Mono'">HÉT 1</text><text x="150" y="18" fill="#64748b" font-size="9" font-family="'JetBrains Mono'">HÉT 2</text><text x="210" y="18" fill="#64748b" font-size="9" font-family="'JetBrains Mono'">HÉT 3</text><text x="270" y="18" fill="#64748b" font-size="9" font-family="'JetBrains Mono'">HÉT 4</text><text x="10" y="52" fill="#334155" font-size="9.5" font-family="'JetBrains Mono'">Tervezés</text><rect x="65" y="40" width="70" height="20" rx="4" fill="#ef4444"/><text x="10" y="87" fill="#334155" font-size="9.5" font-family="'JetBrains Mono'">Engedély</text><rect x="135" y="75" width="85" height="20" rx="4" fill="#ef4444"/><text x="10" y="122" fill="#334155" font-size="9.5" font-family="'JetBrains Mono'">Beszerzés</text><rect x="90" y="110" width="55" height="20" rx="4" fill="#3b82f6"/><text x="10" y="157" fill="#334155" font-size="9.5" font-family="'JetBrains Mono'">Kivitelezés</text><rect x="220" y="145" width="75" height="20" rx="4" fill="#ef4444"/><text x="160" y="185" fill="#ef4444" font-size="9.5" font-weight="bold" font-family="'JetBrains Mono'" text-anchor="middle">PIROS SÁVOK = KRITIKUS ÚT (CPM)</text></svg>`,
-  dmaic: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><circle cx="160" cy="95" r="65" stroke="#cbd5e1" stroke-width="2.5" fill="none" stroke-dasharray="6 6"/><rect x="125" y="12" width="70" height="28" rx="6" fill="#1fa876"/><text x="160" y="30" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">DEFINE</text><rect x="225" y="60" width="75" height="28" rx="6" fill="#1fa876" fill-opacity="0.85"/><text x="262" y="78" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">MEASURE</text><rect x="200" y="130" width="75" height="28" rx="6" fill="#1fa876" fill-opacity="0.7"/><text x="237" y="148" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">ANALYZE</text><rect x="50" y="130" width="75" height="28" rx="6" fill="#1fa876" fill-opacity="0.7"/><text x="87" y="148" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">IMPROVE</text><rect x="20" y="60" width="75" height="28" rx="6" fill="#1fa876" fill-opacity="0.85"/><text x="57" y="78" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">CONTROL</text><text x="160" y="98" fill="#1fa876" font-family="'Manrope'" font-size="14" font-weight="bold" text-anchor="middle">3,4 DPMO</text></svg>`,
-  diamond: `<svg class="modal-diagram-svg" viewBox="0 0 360 210"><polygon points="25,100 85,35 145,100 85,165" fill="#fff8ea" stroke="#df8e0a" stroke-width="2"/><line x1="85" y1="35" x2="85" y2="165" stroke="#df8e0a" stroke-dasharray="3 3"/><text x="55" y="104" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#ca8a04">DISCOVER</text><text x="115" y="104" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#ca8a04">DEFINE</text><polygon points="175,100 235,35 295,100 235,165" fill="#e8f7f1" stroke="#1fa876" stroke-width="2"/><line x1="235" y1="35" x2="235" y2="165" stroke="#1fa876" stroke-dasharray="3 3"/><text x="205" y="104" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#15803d">DEVELOP</text><text x="265" y="104" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#15803d">DELIVER</text><text x="85" y="185" font-family="'Manrope'" font-size="10" font-weight="bold" fill="#df8e0a" text-anchor="middle">1. Probléma Feltárása</text><text x="235" y="185" font-family="'Manrope'" font-size="10" font-weight="bold" fill="#1fa876" text-anchor="middle">2. Megoldás Tesztelése</text></svg>`,
-  trl: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><defs><linearGradient id="gTrl" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7655cb"/><stop offset="50%" stop-color="#1d7cd8"/><stop offset="100%" stop-color="#1fa876"/></linearGradient></defs><rect x="30" y="25" width="260" height="24" rx="6" fill="url(#gTrl)"/><text x="160" y="41" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="11" text-anchor="middle">TRL 1 —————— TRL 9</text><rect x="25" y="75" width="80" height="46" rx="6" fill="#f4effe" stroke="#7655cb" stroke-width="1.5"/><text x="65" y="95" fill="#7655cb" font-family="'JetBrains Mono'" font-size="11" font-weight="bold" text-anchor="middle">TRL 1-3</text><text x="65" y="111" fill="#5c6c82" font-size="8.5" text-anchor="middle">Labor Alapelv</text><rect x="120" y="75" width="80" height="46" rx="6" fill="#edf5fd" stroke="#1d7cd8" stroke-width="1.5"/><text x="160" y="95" fill="#1d7cd8" font-family="'JetBrains Mono'" font-size="11" font-weight="bold" text-anchor="middle">TRL 4-6</text><text x="160" y="111" fill="#5c6c82" font-size="8.5" text-anchor="middle">Prototípus Teszt</text><rect x="215" y="75" width="80" height="46" rx="6" fill="#e8f7f1" stroke="#1fa876" stroke-width="1.5"/><text x="255" y="95" fill="#1fa876" font-family="'JetBrains Mono'" font-size="11" font-weight="bold" text-anchor="middle">TRL 7-9</text><text x="255" y="111" fill="#5c6c82" font-size="8.5" text-anchor="middle">Ipari Éles Üzem</text></svg>`,
-  mvp: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><circle cx="160" cy="95" r="55" stroke="#df8e0a" stroke-width="2.5" fill="none" stroke-dasharray="5 5"/><rect x="125" y="16" width="70" height="28" rx="5" fill="#df8e0a"/><text x="160" y="34" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10.5" text-anchor="middle">BUILD</text><rect x="225" y="95" width="75" height="28" rx="5" fill="#df8e0a"/><text x="262" y="113" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10.5" text-anchor="middle">MEASURE</text><rect x="20" y="95" width="75" height="28" rx="5" fill="#df8e0a"/><text x="57" y="113" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10.5" text-anchor="middle">LEARN</text><text x="160" y="98" fill="#142033" font-family="'Manrope'" font-size="16" font-weight="bold" text-anchor="middle">MVP</text></svg>`,
-  vsm: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><rect x="20" y="35" width="65" height="42" rx="5" fill="#f8fafc" stroke="#94a3b8"/><text x="52" y="60" fill="#1e293b" font-family="'JetBrains Mono'" font-size="9.5" text-anchor="middle">Kérelem</text><rect x="125" y="35" width="70" height="42" rx="5" fill="#fff8ea" stroke="#df8e0a"/><text x="160" y="60" fill="#df8e0a" font-family="'JetBrains Mono'" font-size="9.5" text-anchor="middle">Feldolgozás</text><rect x="235" y="35" width="65" height="42" rx="5" fill="#e8f7f1" stroke="#1fa876"/><text x="267" y="60" fill="#1fa876" font-family="'JetBrains Mono'" font-size="9.5" text-anchor="middle">Átadás</text><path d="M85 56 H125 M195 56 H235" stroke="#64748b" stroke-width="2"/><path d="M20 115 H60 V140 H130 V115 H165 V140 H235 V115 H290" stroke="#df8e0a" stroke-width="2.5" fill="none"/><text x="160" y="160" fill="#ef4444" font-family="'JetBrains Mono'" font-size="9.5" font-weight="bold" text-anchor="middle">Várakozási idők (Muda) felszámolása</text></svg>`,
-  rpa: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><rect x="20" y="70" width="70" height="60" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/><text x="55" y="98" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1e293b" text-anchor="middle">Input Adat</text><path d="M90 100 H120" stroke="#1fa876" stroke-width="2"/><rect x="120" y="55" width="100" height="90" rx="8" fill="#e8f7f1" stroke="#1fa876" stroke-width="2"/><circle cx="170" cy="85" r="14" fill="#1fa876" opacity="0.15"/><text x="170" y="90" font-size="14" text-anchor="middle">🤖</text><text x="170" y="115" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#142033" text-anchor="middle">RPA MOTOR</text><path d="M220 100 H250" stroke="#1fa876" stroke-width="2"/><rect x="250" y="50" width="70" height="35" rx="5" fill="#f8fafc" stroke="#64748b"/><text x="285" y="72" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#1e293b" text-anchor="middle">ERP Rendszer</text><rect x="250" y="115" width="70" height="35" rx="5" fill="#f8fafc" stroke="#64748b"/><text x="285" y="137" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#1e293b" text-anchor="middle">Főkönyv</text><text x="170" y="175" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1fa876" text-anchor="middle">24/7 GÉPI FELDOLGOZÁS · NULLA HIBA</text></svg>`,
-  ocr: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><rect x="20" y="55" width="65" height="90" rx="4" fill="#fff" stroke="#dc2626" stroke-width="1.5"/><text x="52" y="85" font-size="16" text-anchor="middle">📄</text><text x="52" y="110" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#1e293b" text-anchor="middle">PDF Számla</text><path d="M85 100 H120" stroke="#cbd5e1" stroke-width="2"/><rect x="120" y="55" width="95" height="90" rx="6" fill="#f8fafc" stroke="#38bdf8" stroke-width="2"/><line x1="125" y1="85" x2="210" y2="85" stroke="#38bdf8" stroke-width="2" stroke-dasharray="2 2"/><text x="167" y="105" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#0284c7" text-anchor="middle">OCR SCAN</text><path d="M215 100 H245" stroke="#cbd5e1" stroke-width="2"/><rect x="245" y="55" width="80" height="90" rx="5" fill="#e8f7f1" stroke="#1fa876" stroke-width="1.5"/><text x="285" y="80" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#15803d" text-anchor="middle">JSON / XML</text><text x="285" y="105" font-family="'JetBrains Mono'" font-size="7" fill="#334155" text-anchor="middle">IBAN Kinyerve</text><text x="285" y="125" font-family="'JetBrains Mono'" font-size="7" fill="#334155" text-anchor="middle">Összeg &amp; ÁFA</text></svg>`,
-  evm: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><line x1="40" y1="160" x2="280" y2="160" stroke="#64748b" stroke-width="1.5"/><line x1="40" y1="160" x2="40" y2="30" stroke="#64748b" stroke-width="1.5"/><path d="M40 160 Q 140 110, 260 40" stroke="#3b82f6" stroke-width="2" fill="none"/><text x="265" y="42" fill="#3b82f6" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold">PV (Terv)</text><path d="M40 160 Q 140 130, 200 90" stroke="#1fa876" stroke-width="2.5" fill="none"/><text x="205" y="93" fill="#1fa876" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold">EV (Érték)</text><path d="M40 160 Q 140 90, 200 70" stroke="#ef4444" stroke-width="2" stroke-dasharray="3 3" fill="none"/><text x="205" y="73" fill="#ef4444" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold">AC (Költség)</text><text x="160" y="185" fill="#1e293b" font-family="'JetBrains Mono'" font-size="9" text-anchor="middle">CPI &lt; 1 = Költségtúllépés · SPI &lt; 1 = Csúszás</text></svg>`,
-  neural: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><line x1="40" y1="60" x2="160" y2="40" stroke="#93c5fd" stroke-width="1.5"/><line x1="40" y1="60" x2="160" y2="100" stroke="#93c5fd" stroke-width="1.5"/><line x1="40" y1="140" x2="160" y2="100" stroke="#93c5fd" stroke-width="1.5"/><line x1="40" y1="140" x2="160" y2="160" stroke="#93c5fd" stroke-width="1.5"/><line x1="160" y1="40" x2="280" y2="100" stroke="#60a5fa" stroke-width="2"/><line x1="160" y1="100" x2="280" y2="100" stroke="#60a5fa" stroke-width="2"/><line x1="160" y1="160" x2="280" y2="100" stroke="#60a5fa" stroke-width="2"/><circle cx="40" cy="60" r="14" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/><circle cx="40" cy="140" r="14" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/><circle cx="160" cy="40" r="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><circle cx="160" cy="100" r="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><circle cx="160" cy="160" r="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><circle cx="280" cy="100" r="16" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="2.5"/><text x="160" y="192" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1e3a8a" text-anchor="middle">NEURÁLIS HÁLÓZAT &amp; SÚLYOZÁS</text></svg>`,
-  quantum: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><ellipse cx="160" cy="100" rx="90" ry="35" fill="none" stroke="#a855f7" stroke-width="2" stroke-dasharray="4 4"/><ellipse cx="160" cy="100" rx="35" ry="90" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="4 4"/><circle cx="160" cy="100" r="18" fill="#7655cb" fill-opacity="0.25" stroke="#7655cb" stroke-width="2.5"/><circle cx="70" cy="100" r="8" fill="#a855f7"/><circle cx="250" cy="100" r="8" fill="#a855f7"/><circle cx="160" cy="10" r="8" fill="#06b6d4"/><circle cx="160" cy="190" r="8" fill="#06b6d4"/><text x="160" y="104" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#7655cb" text-anchor="middle">QUBIT</text></svg>`,
-  contract: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><rect x="30" y="35" width="120" height="130" rx="8" fill="#fff" stroke="#64748b" stroke-width="2"/><path d="M50 60 H130 M50 78 H130 M50 96 H110 M50 114 H120" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round"/><circle cx="120" cy="135" r="14" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="2"/><text x="120" y="139" font-family="'JetBrains Mono'" font-size="11" text-anchor="middle" fill="#d97706">§</text><path d="M165 100 H195" stroke="#10b981" stroke-width="3"/><polygon points="195,100 185,94 185,106" fill="#10b981"/><rect x="205" y="55" width="105" height="90" rx="8" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/><text x="257" y="85" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">JOGI ÉS PÉNZÜGYI</text><text x="257" y="100" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">GARANCIA</text><text x="257" y="125" font-family="'JetBrains Mono'" font-size="8" fill="#166534" text-anchor="middle">Kockázatvédelmi Pajzs</text></svg>`,
-  risk: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><circle cx="80" cy="100" r="45" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/><text x="80" y="95" font-size="18" text-anchor="middle">⚠️</text><text x="80" y="118" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#991b1b" text-anchor="middle">Eltérés / Veszély</text><path d="M135 100 H175" stroke="#64748b" stroke-width="2"/><rect x="185" y="60" width="125" height="80" rx="8" fill="#fff" stroke="#3b82f6" stroke-width="2"/><text x="247" y="88" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Gyökérok (RCA)</text><text x="247" y="106" font-family="'JetBrains Mono'" font-size="8" fill="#475569" text-anchor="middle">➔ Tanulási Ciklus</text><text x="247" y="124" font-family="'JetBrains Mono'" font-size="8" fill="#10b981" font-weight="bold" text-anchor="middle">➔ Megelőző Protokoll</text></svg>`,
-  gate: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><rect x="30" y="60" width="70" height="80" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="2"/><text x="65" y="95" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1e293b" text-anchor="middle">K+F Fázis</text><path d="M100 100 H140" stroke="#64748b" stroke-width="2"/><rect x="140" y="45" width="60" height="110" rx="8" fill="#fff" stroke="#3b82f6" stroke-width="3"/><text x="170" y="95" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#1d7cd8" text-anchor="middle">KAPU</text><text x="170" y="115" font-family="'JetBrains Mono'" font-size="8" fill="#64748b" text-anchor="middle">Go/Kill</text><path d="M200 80 H250" stroke="#10b981" stroke-width="2.5"/><text x="285" y="83" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#10b981">Go (Éles)</text><path d="M200 120 H250" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="3 3"/><text x="285" y="123" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#ef4444">Kill (Archív)</text></svg>`,
-  compliance: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><circle cx="160" cy="90" r="50" fill="#f0fdf4" stroke="#10b981" stroke-width="3"/><path d="M142 90 L155 103 L180 75" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><rect x="80" y="155" width="160" height="26" rx="6" fill="#1e293b"/><text x="160" y="172" font-family="'JetBrains Mono'" font-size="9.5" font-weight="bold" fill="#fff" text-anchor="middle">AUDITÁLT MEGFELELŐSÉG</text></svg>`,
-  sprint: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><circle cx="160" cy="95" r="55" stroke="#7655cb" stroke-width="2.5" fill="none" stroke-dasharray="5 5"/><rect x="125" y="16" width="70" height="28" rx="5" fill="#7655cb"/><text x="160" y="34" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10.5" text-anchor="middle">SPRINT</text><rect x="225" y="95" width="75" height="28" rx="5" fill="#7655cb"/><text x="262" y="113" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10.5" text-anchor="middle">DEMÓ</text><rect x="20" y="95" width="75" height="28" rx="5" fill="#7655cb"/><text x="57" y="113" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10.5" text-anchor="middle">BACKLOG</text><text x="160" y="98" fill="#142033" font-family="'Manrope'" font-size="14" font-weight="bold" text-anchor="middle">2 HÉT</text></svg>`,
-  attitude: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><circle cx="170" cy="100" r="55" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/><path d="M170 55 L170 100 L195 125" stroke="#b45309" stroke-width="3" stroke-linecap="round"/><circle cx="170" cy="100" r="6" fill="#b45309"/><text x="170" y="180" font-family="'JetBrains Mono'" font-size="9.5" font-weight="bold" fill="#92400e" text-anchor="middle">BELSŐ MOTIVÁCIÓ &amp; ATTITŰD</text></svg>`,
-  culture: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><rect x="40" y="40" width="260" height="110" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="2"/><text x="170" y="75" font-size="24" text-anchor="middle">🏛️</text><text x="170" y="105" font-family="'Manrope'" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">VÁLLALATI ÉRTÉKREND</text><text x="170" y="125" font-family="'JetBrains Mono'" font-size="8.5" fill="#64748b" text-anchor="middle">Szervezeti Atmoszféra &amp; Normák</text></svg>`,
-  leadership: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><circle cx="170" cy="65" r="24" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/><text x="170" y="73" font-size="20" text-anchor="middle">👑</text><path d="M170 95 L170 135 M110 135 L230 135 M110 135 L110 155 M230 135 L230 155" stroke="#3b82f6" stroke-width="2" fill="none"/><text x="170" y="185" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1e3a8a" text-anchor="middle">VEZETŐI STÍLUS &amp; DÖNTÉSI JOGKÖR</text></svg>`,
-  role: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><circle cx="170" cy="65" r="24" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/><text x="170" y="72" font-size="18" text-anchor="middle">👤</text><path d="M170 95 V125 M110 125 H230 M110 125 V145 M230 125 V145" stroke="#64748b" stroke-width="2" fill="none"/><rect x="75" y="145" width="70" height="30" rx="5" fill="#f8fafc" stroke="#94a3b8"/><text x="110" y="164" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#334155" text-anchor="middle">Kompetencia</text><rect x="195" y="145" width="70" height="30" rx="5" fill="#f8fafc" stroke="#94a3b8"/><text x="230" y="164" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#334155" text-anchor="middle">Felelősség</text><text x="170" y="22" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1e293b" text-anchor="middle">SZERVEZETI SZEREP &amp; FELELŐSSÉG</text></svg>`
-};
-
-// KÖRNYEZET- ÉS DOKUMENTUMTUDATOS VÁLASZTÓ
-function getToolDetails(key) {
-  const k = key.toLowerCase().replace(/—/g, '-').replace(/–/g, '-');
-  const dimId = dimensions[currentDim].id;
-
-  // 1. SPECIFIKUS MÓDSZERTANOK ÉS ESZKÖZÖK (Mindig prioritást élveznek)
-  if (k.includes('wbs')) return { name: "WBS — Munkacsomag-lebontási Struktúra", badge: "Q1 OPERÁCIÓ // FELADATLEBONTÁS", desc: "A teljes projekt hierarchikus, 100%-os szabály szerinti felbontása önálló munkacsomagokra.", how: "A kész végtermékből indulunk ki fentről lefelé, delegálható és forintosítható egységekre bontva a munkát.", quote: "„Ha nincs benne a WBS-ben, az jogilag és operatívan nem létezik a projektben.”", svg: svgLibrary.wbs };
-  if (k.includes('gantt') || k.includes('cpm') || k.includes('kritikus')) return { name: "Gantt-diagram & CPM (Kritikus Út Módszer)", badge: "Q1 OPERÁCIÓ // ÜTEMTERVEZÉS", desc: "Vízszintes idősávos ütemterv a feladatok közötti függőségi láncokkal.", how: "A kritikus út bármely feladatának csúszása azonnal a teljes projekt végső átadását tolja.", quote: "„A kritikus út nem ismer toleranciát: a tartalék nélküli csúszás azonnali kötbérveszély.”", svg: svgLibrary.gantt };
-  if (k.includes('dmaic') || k.includes('six sigma')) return { name: "Six Sigma DMAIC Minőségirányítás", badge: "Q1 OPERÁCIÓ // MINŐSÉG", desc: "Statisztikai minőségirányítás a folyamatingadozások 3,4 DPMO szint alá szorítására.", how: "Define ➔ Measure ➔ Analyze ➔ Improve ➔ Control strukturált fázisok mentén.", quote: "„Csak azt tudod fejleszteni, amit képes vagy pontosan megmérni.”", svg: svgLibrary.dmaic };
-  if (k.includes('design thinking') || k.includes('diamond') || k.includes('gyemant') || k.includes('gyémánt')) return { name: "Design Thinking — Kettős Gyémánt Modell", badge: "Q3 ADAPTÁCIÓ // INNOVÁCIÓ", desc: "Emberközpontú tervezési keretrendszer a rejtett felhasználói fájdalompontok feltárására.", how: "Discover ➔ Define (valódi probléma) ➔ Develop ➔ Deliver (validált megoldás).", quote: "„Ne a technológiából indulj ki, hanem az ügyfél valós szenvedéséből!”", svg: svgLibrary.diamond };
-  if (k.includes('trl')) return { name: "TRL 1-9 Technológiai Érettségi Szintek", badge: "Q2 INNOVÁCIÓ // K+F KOCKÁZAT", desc: "9 fokozatú skála az alapelvi laborkutatástól (TRL 1) a teljes ipari éles üzemig (TRL 9).", how: "Megakadályozza, hogy éretlen kísérletre gyárépítési büdzsét allokáljunk.", quote: "„Ne építs gyárat egy olyan elméletre, amit még nem igazoltál a laboratóriumban!”", svg: svgLibrary.trl };
-  if (k.includes('mvp') || k.includes('lean startup')) return { name: "MVP — Minimum Viable Product", badge: "Q3 ADAPTÁCIÓ // PIACI VALIDÁCIÓ", desc: "A lehető legkisebb működőképes verzió, amivel a piacon igazolható a valós kereslet.", how: "Build (Építs) ➔ Measure (Mérj) ➔ Learn (Tanulj) gyors visszacsatolási hurok.", quote: "„Ha nem érzed kissé kínosnak az első verziót, túl későn léptél ki a vevők elé.”", svg: svgLibrary.mvp };
-  if (k.includes('vsm') || k.includes('ertek') || k.includes('érték')) return { name: "VSM — Value Stream Mapping (Értékáram-térkép)", badge: "Q3 LEAN // FOLYAMATOPTIMALIZÁLÁS", desc: "Feltérképezi az értéknövelő lépéseket és kizárja a folyamatbeli várakozásokat.", how: "Láthatóvá teszi a valós átfutási idő (Lead Time) és megmunkálási idő arányát.", quote: "„A 30 napos folyamatból az értékteremtés gyakran 4 óra sincs: a többi várakozás.”", svg: svgLibrary.vsm };
-  if (k.includes('rpa') || k.includes('szoftverrobot')) return { name: "RPA — Robotic Process Automation", badge: "Q1 OPERÁCIÓ // SZOFTVERROBOTOK", desc: "Szabályalapú szoftverrobotok a rutin emberi adatmozgatás kiváltására 24/7 üzemben.", how: "UI szinten mozgatja az adatokat Excel, levelezés és ERP között nulla hibával.", quote: "„Ne embereket fizessünk azért, hogy robotként kattintsanak.”", svg: svgLibrary.rpa };
-  if (k.includes('ocr') || k.includes('szamla') || k.includes('számla')) return { name: "OCR — Optikai Karakterfelismerés", badge: "Q1 OPERÁCIÓ // AUTOMATIZÁLÁS", desc: "PDF-ek és számlák átalakítása strukturált könyvelési adattá AI ellenőrzéssel.", how: "Azonosítja az IBAN-t, összeget és ÁFÁ-t, és közvetlenül rögzíti az ERP-ben.", quote: "„A manuális számlarögzítés a modern iroda legnagyobb pénzpazarlása.”", svg: svgLibrary.ocr
+<!-- KÜLSŐ, TISZTA JAVASCRIPT BETÖLTÉSE A GYÖKÉRBŐL -->
+<script src="app.js"></script>
+</body>
+</html>
