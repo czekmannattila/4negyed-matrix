@@ -6,10 +6,10 @@
 <title>Stratégiai Döntési Mátrix — Executive C-Level Edition</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Manrope:wght@700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f4f6f9; --paper:#ffffff; --paper-2:#fbfcfe; --ink:#142033; --muted:#5c6c82;
+  --bg:#f4f6f9; --paper:#ffffff; --ink:#142033; --muted:#5c6c82;
   --line:#d8e1eb; --line-2:#c7d3e2; --navy:#122a42;
   --q1:#1fa876; --q1s:#e8f7f1; --q2:#1d7cd8; --q2s:#edf5fd;
   --q3:#df8e0a; --q3s:#fff8ea; --q4:#7655cb; --q4s:#f4effe;
@@ -404,7 +404,354 @@ body.mode-intro .card.intro-revealed .footer{display:none !important}
   </div>
 </div>
 
-<!-- KÜLSŐ, TISZTA JAVASCRIPT BETÖLTÉSE A GYÖKÉRBŐL -->
-<script src="app.js"></script>
+<script>
+// 10 KÜLÖNBÖZŐ VEKTOROS GRAFIKA TÁRA
+const svgLib = {
+  wbs: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><rect x="95" y="10" width="130" height="34" rx="6" fill="#1fa876" fill-opacity="0.25" stroke="#1fa876" stroke-width="2"/><text x="160" y="32" fill="#142033" font-family="'JetBrains Mono'" font-size="11" font-weight="bold" text-anchor="middle">PROJEKT (100%)</text><path d="M160 44 V70 M45 70 H275 M45 70 V90 M160 70 V90 M275 70 V90" stroke="#1fa876" stroke-width="2" fill="none"/><rect x="10" y="90" width="70" height="30" rx="5" fill="#edf3f9" stroke="#7b94ad"/><text x="45" y="109" fill="#142033" font-family="'JetBrains Mono'" font-size="9" text-anchor="middle">WBS 1.1</text><rect x="125" y="90" width="70" height="30" rx="5" fill="#edf3f9" stroke="#7b94ad"/><text x="160" y="109" fill="#142033" font-family="'JetBrains Mono'" font-size="9" text-anchor="middle">WBS 1.2</text><rect x="240" y="90" width="70" height="30" rx="5" fill="#edf3f9" stroke="#7b94ad"/><text x="275" y="109" fill="#142033" font-family="'JetBrains Mono'" font-size="9" text-anchor="middle">WBS 1.3</text><path d="M45 120 V140 M160 120 V140 M275 120 V140" stroke="#7b94ad" stroke-dasharray="3 3"/><rect x="10" y="140" width="70" height="26" rx="4" fill="#fff" stroke="#1fa876"/><text x="45" y="157" fill="#1fa876" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" text-anchor="middle">Munkacsomag</text><rect x="125" y="140" width="70" height="26" rx="4" fill="#fff" stroke="#1fa876"/><text x="160" y="157" fill="#1fa876" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" text-anchor="middle">Munkacsomag</text><rect x="240" y="140" width="70" height="26" rx="4" fill="#fff" stroke="#1fa876"/><text x="275" y="157" fill="#1fa876" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" text-anchor="middle">Munkacsomag</text></svg>`,
+  gantt: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><line x1="60" y1="25" x2="300" y2="25" stroke="#cbd5e1" stroke-width="1.5"/><text x="90" y="18" fill="#64748b" font-size="9" font-family="'JetBrains Mono'">HÉT 1</text><text x="150" y="18" fill="#64748b" font-size="9" font-family="'JetBrains Mono'">HÉT 2</text><text x="210" y="18" fill="#64748b" font-size="9" font-family="'JetBrains Mono'">HÉT 3</text><text x="270" y="18" fill="#64748b" font-size="9" font-family="'JetBrains Mono'">HÉT 4</text><text x="10" y="52" fill="#334155" font-size="9.5" font-family="'JetBrains Mono'">Tervezés</text><rect x="65" y="40" width="70" height="20" rx="4" fill="#ef4444"/><text x="10" y="87" fill="#334155" font-size="9.5" font-family="'JetBrains Mono'">Engedély</text><rect x="135" y="75" width="85" height="20" rx="4" fill="#ef4444"/><text x="10" y="122" fill="#334155" font-size="9.5" font-family="'JetBrains Mono'">Beszerzés</text><rect x="90" y="110" width="55" height="20" rx="4" fill="#3b82f6"/><text x="10" y="157" fill="#334155" font-size="9.5" font-family="'JetBrains Mono'">Kivitelezés</text><rect x="220" y="145" width="75" height="20" rx="4" fill="#ef4444"/><text x="160" y="185" fill="#ef4444" font-size="9.5" font-weight="bold" font-family="'JetBrains Mono'" text-anchor="middle">PIROS SÁVOK = KRITIKUS ÚT (CPM)</text></svg>`,
+  dmaic: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><circle cx="160" cy="95" r="65" stroke="#cbd5e1" stroke-width="2.5" fill="none" stroke-dasharray="6 6"/><rect x="125" y="12" width="70" height="28" rx="6" fill="#1fa876"/><text x="160" y="30" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">DEFINE</text><rect x="225" y="60" width="75" height="28" rx="6" fill="#1fa876" fill-opacity="0.85"/><text x="262" y="78" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">MEASURE</text><rect x="200" y="130" width="75" height="28" rx="6" fill="#1fa876" fill-opacity="0.7"/><text x="237" y="148" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">ANALYZE</text><rect x="50" y="130" width="75" height="28" rx="6" fill="#1fa876" fill-opacity="0.7"/><text x="87" y="148" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">IMPROVE</text><rect x="20" y="60" width="75" height="28" rx="6" fill="#1fa876" fill-opacity="0.85"/><text x="57" y="78" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="10" text-anchor="middle">CONTROL</text><text x="160" y="98" fill="#1fa876" font-family="'Manrope'" font-size="14" font-weight="bold" text-anchor="middle">3,4 DPMO</text></svg>`,
+  diamond: `<svg class="modal-diagram-svg" viewBox="0 0 360 210"><polygon points="25,100 85,35 145,100 85,165" fill="#fff8ea" stroke="#df8e0a" stroke-width="2"/><line x1="85" y1="35" x2="85" y2="165" stroke="#df8e0a" stroke-dasharray="3 3"/><text x="55" y="104" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#ca8a04">DISCOVER</text><text x="115" y="104" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#ca8a04">DEFINE</text><polygon points="175,100 235,35 295,100 235,165" fill="#e8f7f1" stroke="#1fa876" stroke-width="2"/><line x1="235" y1="35" x2="235" y2="165" stroke="#1fa876" stroke-dasharray="3 3"/><text x="205" y="104" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#15803d">DEVELOP</text><text x="265" y="104" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#15803d">DELIVER</text><text x="85" y="185" font-family="'Manrope'" font-size="10" font-weight="bold" fill="#df8e0a" text-anchor="middle">1. Probléma Feltárása</text><text x="235" y="185" font-family="'Manrope'" font-size="10" font-weight="bold" fill="#1fa876" text-anchor="middle">2. Megoldás Tesztelése</text></svg>`,
+  trl: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><defs><linearGradient id="gTrl" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7655cb"/><stop offset="50%" stop-color="#1d7cd8"/><stop offset="100%" stop-color="#1fa876"/></linearGradient></defs><rect x="30" y="25" width="260" height="24" rx="6" fill="url(#gTrl)"/><text x="160" y="41" fill="#fff" font-family="'JetBrains Mono'" font-weight="bold" font-size="11" text-anchor="middle">TRL 1 —————— TRL 9</text><rect x="25" y="75" width="80" height="46" rx="6" fill="#f4effe" stroke="#7655cb" stroke-width="1.5"/><text x="65" y="95" fill="#7655cb" font-family="'JetBrains Mono'" font-size="11" font-weight="bold" text-anchor="middle">TRL 1-3</text><text x="65" y="111" fill="#5c6c82" font-size="8.5" text-anchor="middle">Labor Alapelv</text><rect x="120" y="75" width="80" height="46" rx="6" fill="#edf5fd" stroke="#1d7cd8" stroke-width="1.5"/><text x="160" y="95" fill="#1d7cd8" font-family="'JetBrains Mono'" font-size="11" font-weight="bold" text-anchor="middle">TRL 4-6</text><text x="160" y="111" fill="#5c6c82" font-size="8.5" text-anchor="middle">Prototípus Teszt</text><rect x="215" y="75" width="80" height="46" rx="6" fill="#e8f7f1" stroke="#1fa876" stroke-width="1.5"/><text x="255" y="95" fill="#1fa876" font-family="'JetBrains Mono'" font-size="11" font-weight="bold" text-anchor="middle">TRL 7-9</text><text x="255" y="111" fill="#5c6c82" font-size="8.5" text-anchor="middle">Ipari Éles Üzem</text></svg>`,
+  gate: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><rect x="30" y="60" width="70" height="80" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="2"/><text x="65" y="95" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1e293b" text-anchor="middle">K+F Fázis</text><path d="M100 100 H140" stroke="#64748b" stroke-width="2"/><rect x="140" y="45" width="60" height="110" rx="8" fill="#fff" stroke="#3b82f6" stroke-width="3"/><text x="170" y="95" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#1d7cd8" text-anchor="middle">KAPU</text><path d="M200 80 H250" stroke="#10b981" stroke-width="2.5"/><text x="285" y="83" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#10b981">Go (Éles)</text><path d="M200 120 H250" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="3 3"/><text x="285" y="123" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#ef4444">Kill (Archív)</text></svg>`,
+  vsm: `<svg class="modal-diagram-svg" viewBox="0 0 320 200"><rect x="20" y="35" width="65" height="42" rx="5" fill="#f8fafc" stroke="#94a3b8"/><text x="52" y="60" fill="#1e293b" font-family="'JetBrains Mono'" font-size="9.5" text-anchor="middle">Kérelem</text><rect x="125" y="35" width="70" height="42" rx="5" fill="#fff8ea" stroke="#df8e0a"/><text x="160" y="60" fill="#df8e0a" font-family="'JetBrains Mono'" font-size="9.5" text-anchor="middle">Feldolgozás</text><rect x="235" y="35" width="65" height="42" rx="5" fill="#e8f7f1" stroke="#1fa876"/><text x="267" y="60" fill="#1fa876" font-family="'JetBrains Mono'" font-size="9.5" text-anchor="middle">Átadás</text><path d="M85 56 H125 M195 56 H235" stroke="#64748b" stroke-width="2"/><path d="M20 115 H60 V140 H130 V115 H165 V140 H235 V115 H290" stroke="#df8e0a" stroke-width="2.5" fill="none"/><text x="160" y="160" fill="#ef4444" font-family="'JetBrains Mono'" font-size="9.5" font-weight="bold" text-anchor="middle">Várakozási idők (Muda) felszámolása</text></svg>`,
+  tech: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><rect x="20" y="70" width="70" height="60" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/><text x="55" y="98" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1e293b" text-anchor="middle">Input Adat</text><path d="M90 100 H120" stroke="#1fa876" stroke-width="2"/><rect x="120" y="55" width="100" height="90" rx="8" fill="#e8f7f1" stroke="#1fa876" stroke-width="2"/><text x="170" y="90" font-size="16" text-anchor="middle">🤖</text><text x="170" y="115" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#142033" text-anchor="middle">AUTOMATIZÁCIÓ</text><path d="M220 100 H250" stroke="#1fa876" stroke-width="2"/><rect x="250" y="50" width="70" height="35" rx="5" fill="#f8fafc" stroke="#64748b"/><text x="285" y="72" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#1e293b" text-anchor="middle">ERP / Rendszer</text><rect x="250" y="115" width="70" height="35" rx="5" fill="#f8fafc" stroke="#64748b"/><text x="285" y="137" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#1e293b" text-anchor="middle">Főkönyv</text></svg>`,
+  contract: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><rect x="30" y="35" width="120" height="130" rx="8" fill="#fff" stroke="#64748b" stroke-width="2"/><path d="M50 60 H130 M50 78 H130 M50 96 H110 M50 114 H120" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round"/><circle cx="120" cy="135" r="14" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="2"/><text x="120" y="139" font-family="'JetBrains Mono'" font-size="11" text-anchor="middle" fill="#d97706">§</text><path d="M165 100 H195" stroke="#10b981" stroke-width="3"/><polygon points="195,100 185,94 185,106" fill="#10b981"/><rect x="205" y="55" width="105" height="90" rx="8" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/><text x="257" y="85" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">JOGI ÉS PÉNZÜGYI</text><text x="257" y="100" font-family="'JetBrains Mono'" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">GARANCIA</text><text x="257" y="125" font-family="'JetBrains Mono'" font-size="8" fill="#166534" text-anchor="middle">Kockázatvédelmi Pajzs</text></svg>`,
+  risk: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><circle cx="80" cy="100" r="45" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/><text x="80" y="95" font-size="18" text-anchor="middle">⚠️</text><text x="80" y="118" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#991b1b" text-anchor="middle">Eltérés / Veszély</text><path d="M135 100 H175" stroke="#64748b" stroke-width="2"/><rect x="185" y="60" width="125" height="80" rx="8" fill="#fff" stroke="#3b82f6" stroke-width="2"/><text x="247" y="88" font-family="'JetBrains Mono'" font-size="9" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Gyökérok (RCA)</text><text x="247" y="106" font-family="'JetBrains Mono'" font-size="8" fill="#475569" text-anchor="middle">➔ Tanulási Ciklus</text><text x="247" y="124" font-family="'JetBrains Mono'" font-size="8" fill="#10b981" font-weight="bold" text-anchor="middle">➔ Megelőző Protokoll</text></svg>`,
+  role: `<svg class="modal-diagram-svg" viewBox="0 0 340 200"><circle cx="170" cy="65" r="24" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/><text x="170" y="72" font-size="18" text-anchor="middle">👤</text><path d="M170 95 V125 M110 125 H230 M110 125 V145 M230 125 V145" stroke="#64748b" stroke-width="2" fill="none"/><rect x="75" y="145" width="70" height="30" rx="5" fill="#f8fafc" stroke="#94a3b8"/><text x="110" y="164" font-family="'JetBrains Mono'" font-size="8" font-weight="bold" fill="#334155" text-anchor="middle">Kompetencia</text><rect x="195" y="145" width="70" height="30" rx="5" fill="#f8fafc" stroke="#94a3b8"/><text x="230" y="164" font-family="'JetBrains Mono'" font-size="8.5" font-weight="bold" fill="#334155" text-anchor="middle">Felelősség</text></svg>`
+};
+
+function getToolDetails(key) {
+  const k = key.toLowerCase();
+  if (k.includes('wbs')) return { name: "WBS — Munkacsomag-lebontási Struktúra", badge: "Q1 // LEBONTÁS", desc: "A projekt hierarchikus felbontása önálló munkacsomagokra.", how: "A végtermékből kiindulva képezünk forintosítható egységeket.", quote: "„Ha nincs benne a WBS-ben, az nem létezik.”", svg: svgLib.wbs };
+  if (k.includes('gantt') || k.includes('cpm') || k.includes('kritikus')) return { name: "Gantt & CPM (Kritikus Út)", badge: "Q1 // ÜTEMTERV", desc: "Ütemterv, mely azonosítja a tartalékidő nélküli feladatokat.", how: "A kritikus út csúszása azonnal tolja a végső átadást.", quote: "„A kritikus út nem ismer toleranciát.”", svg: svgLib.gantt };
+  if (k.includes('dmaic') || k.includes('six sigma')) return { name: "Six Sigma DMAIC Minőségirányítás", badge: "Q1 // MINŐSÉG", desc: "Folyamatingadozások 3,4 DPMO szint alá szorítása.", how: "Define ➔ Measure ➔ Analyze ➔ Improve ➔ Control.", quote: "„Csak azt tudod fejleszteni, amit mérsz.”", svg: svgLib.dmaic };
+  if (k.includes('design') || k.includes('diamond') || k.includes('gyémánt')) return { name: "Design Thinking — Kettős Gyémánt", badge: "Q3 // INNOVÁCIÓ", desc: "Emberközpontú tervezés a valós fájdalompontok feltárására.", how: "Discover ➔ Define ➔ Develop ➔ Deliver.", quote: "„Az ügyfél valós szenvedéséből indulj ki.”", svg: svgLib.diamond };
+  if (k.includes('trl')) return { name: "TRL 1-9 Technológiai Érettség", badge: "Q2 // K+F KOCKÁZAT", desc: "9 fokozatú skála az alapelvtől a piaci üzemig.", how: "Megakadályozza, hogy éretlen kísérletre gyárat építsünk.", quote: "„Laborban kísérletezz, ne az éles gyárban.”", svg: svgLib.trl };
+  if (k.includes('kapu') || k.includes('gate') || k.includes('döntés') || k.includes('bizottság')) return { name: key, badge: "DÖNTÉSI KAPU", desc: "Formális ellenőrzési pont a projektek továbbengedésére (Go/Kill).", how: "Objektív mérőszámok alapján dönt a folytatásról.", quote: "„A bátor Kill döntés megmentett vagyon.”", svg: svgLib.gate };
+  if (k.includes('vsm') || k.includes('értékáram') || k.includes('muda') || k.includes('gemba')) return { name: "VSM — Értékáram-optimalizálás", badge: "Q3 // LEAN", desc: "Feltérképezi az értéknövelő lépéseket és kiirtja a veszteséget.", how: "Láthatóvá teszi a várakozási időket a folyamatban.", quote: "„A felesleges várakozás tiszta veszteség.”", svg: svgLib.vsm };
+  if (k.includes('rpa') || k.includes('ocr') || k.includes('robot') || k.includes('automatizálás') || k.includes('workflow') || k.includes('ai') || k.includes('neurális') || k.includes('kvantum')) return { name: key, badge: "TECHNOLÓGIA & AI", desc: "Digitális és mesterséges intelligencia eszköz a pontosságért.", how: "Kiváltja a monoton emberi feladatokat és predikciót ad.", quote: "„A gép dolgozzon, az ember döntsön.”", svg: svgLib.tech };
+  if (k.includes('szerződ') || k.includes('fixed') || k.includes('t&m') || k.includes('sla') || k.includes('jog') || k.includes('költség') || k.includes('opex') || k.includes('capex') || k.includes('evm') || k.includes('pénz') || k.includes('roi')) return { name: key, badge: "PÉNZÜGY & JOG", desc: "Szerződéses garancia és fegyelmezett költségkontroll.", how: "A bizonytalansághoz szabja az elszámolást és a kötbért.", quote: "„A megfelelő szerződés elhárítja a kockázatot.”", svg: svgLib.contract };
+  if (k.includes('hiba') || k.includes('rca') || k.includes('csapda') || k.includes('dogma') || k.includes('méreg') || k.includes('veszély') || k.includes('buktató')) return { name: key, badge: "HIBAKULTÚRA", desc: "A döntési csapdák és téves reflexek elhárítása.", how: "Azonosítja a szervezeti dogmát és megelőző szűrőt képez.", quote: "„A hiba a tanulási folyamat része.”", svg: svgLib.risk };
+  return { name: key, badge: "SZERVEZETI SZEREP", desc: "Döntési jogkörök és felhatalmazási szint a negyedben.", how: "Tiszta felelősségi határokat szab a csapatok között.", quote: "„A vezetés a megfelelő döntési tér biztosítása.”", svg: svgLib.role };
+}
+
+// 12 DIMENZIÓ
+const dimensions = [
+  { id: "modszertan", name: "Módszertan & Folyamat", title: "Módszertan és Problémamegoldási Keretrendszerek", desc: "Hogyan strukturáljuk a folyamatokat a bizonytalanság szerint?",
+    q1: { focus: "Vízesés (Waterfall) & Minőség", desc: "Determinisztikus tervek, nulla eltérés.", tags: ["WBS — Munkacsomag-lebontás", "Gantt & CPM — Kritikus Út", "Six Sigma DMAIC Minőségirányítás", "ISO 9001 Szabványrendszerek"] },
+    q2: { focus: "Stage-Gate (Szakasz-Kapu)", desc: "Mérnöki hipotézisek ellenőrzése kapukkal.", tags: ["TRL 1-9 Technológiai Érettség", "FMEA Kockázatelemzés", "DOE Kísérlettervezés", "Digital Twin Ikerpár"] },
+    q3: { focus: "Lean & Design Thinking", desc: "Felhasználói igények és MVP tesztelés.", tags: ["Design Thinking — Kettős Gyémánt", "Lean Startup (MVP)", "VSM — Értékáram-Térképezés", "8 Muda Veszteségvadászat"] },
+    q4: { focus: "Agile & Kísérlet", desc: "Rövid sprintek extrém bizonytalanságban.", tags: ["Kutatási Spikes", "Sprint Backlog", "Daily Standup Szinkron", "Heti Retrospektív"] }
+  },
+  { id: "ai", name: "AI & Digitális Eszközök", title: "Mesterséges Intelligencia és Automatizáció", desc: "Milyen szintű AI technológiát alkalmazunk?",
+    q1: { focus: "RPA & Automatizáció", desc: "Szabályalapú robotizálás, számlafeldolgozás.", tags: ["RPA — Szoftverrobotizáció", "OCR — Számlafeldolgozás", "Workflow Motorok", "ERP Integráció"] },
+    q2: { focus: "Prediktív Analitika", desc: "Fizikai rendszerek virtuális leképezése.", tags: ["Prediktív Karbantartás", "Neurális Hálózatok (ML)", "DOE Szimuláció", "Digital Twin Ikerpár"] },
+    q3: { focus: "Process Mining & AI", desc: "Szűk keresztmetszetek kibányászása.", tags: ["Process Mining Folyamatbányászat", "LLM Ügyfélelemzés", "A/B Tesztelő Botok", "Gemba Digitális Audit"] },
+    q4: { focus: "Autonóm Ágensek", desc: "Összefüggések autonóm kutatása.", tags: ["Multi-Agent Rendszerek", "Generatív Anyagtudomány", "Kvantum Számítási Modellek", "Kísérleti LLM"] }
+  },
+  { id: "hr", name: "Személyiségprofilok & HR", title: "HR Stratégia és Domináns Karakterek", desc: "Kik a siker kulcsszereplői?",
+    q1: { focus: "A Precíz Végrehajtó", desc: "Szabálykövető folyamatgazda alkat.", tags: ["SOP Szabványfelelős", "Minőségbiztosítási Ellenőr", "Operatív Folyamatgazda"] },
+    q2: { focus: "A Mély Analitikus", desc: "Megszállott kutató-mérnök.", tags: ["K+F Vezető Kutató", "Adattudós & Matematikus", "Szimulációs Szakmérnök"] },
+    q3: { focus: "Az Értékáram-Vadász", desc: "Kiszúrja a pénzpazarlást.", tags: ["Lean Six Sigma Black Belt", "Product Owner (PO)", "Értékáram Menedzser"] },
+    q4: { focus: "A Reziliens Felfedező", desc: "Magas kudarctűrésű úttörő.", tags: ["Vállalkozói Alkat", "Scrum Master & Coach", "Inkubációs Igazgató"] }
+  },
+  { id: "attitud", name: "Munkavállalói Attitűd", title: "Munkavállalói Szerep és Motiváció", desc: "Hogyan éli meg a munkát a dolgozó?",
+    q1: { focus: "Biztonság és Fegyelem", desc: "A stabil rutin megnyugtató védőháló.", tags: ["Kiszámíthatóság", "Fegyelmezett Rutin", "Nulla Váratlan Stressz"] },
+    q2: { focus: "Szakmai Büszkeség", desc: "Az intellektuális kihívás motivál.", tags: ["Mérnöki Elismerés", "Problémamegoldási Flow", "Műszaki Tekintély"] },
+    q3: { focus: "Piaci Kíváncsiság", desc: "Kiszúrni a veszteséget és a vevőt.", tags: ["Közvetlen Visszacsatolás", "Agilitás a Vevőért", "Kísérletezési Kedv"] },
+    q4: { focus: "Úttörő Küldetéstudat", desc: "Valami teljesen új megalkotása.", tags: ["Belső Küldetéstudat", "Radikális Bátorság", "Bajtársiasság a Ködben"] }
+  },
+  { id: "vezetes", name: "Vezetés & Döntéshozatal", title: "Vezetői Stílus és Döntések", desc: "Hogyan irányít a vezetés?",
+    q1: { focus: "Direktív Vezetés", desc: "Szabályzat-alapú hierarchikus kontroll.", tags: ["Hierarchikus Jóváhagyás", "Audit Alapú Ellenőrzés", "Utasítás és Kontroll"] },
+    q2: { focus: "Konzultatív Mentorálás", desc: "Mérnöki adatok és kapu-felülvizsgálat.", tags: ["Szakmai Döntőbizottság", "Adatalapú Műszaki Vita", "Stage-Gate Kapuőrök"] },
+    q3: { focus: "Inspiráló Vezetés", desc: "Valós folyamatmérési adatok.", tags: ["Adatvezérelt Döntéshozatal", "Pivot Felhatalmazás", "Gemba Séta & Jelenlét"] },
+    q4: { focus: "Szolga Vezetés (Servant)", desc: "Akadályelhárítás és biztonság.", tags: ["Pszichológiai Biztonság", "Akadályelhárítás", "Teljes Csapatfelhatalmazás"] }
+  },
+  { id: "kultura", name: "Vállalati Kultúra", title: "Kultúra és Szervezeti Légkör", desc: "Milyen az irodai atmoszféra?",
+    q1: { focus: "Fegyelem Temploma", desc: "Svájci óra pontosság és stabilitás.", tags: ["Megbízhatóság", "Szabványok Tisztelete", "Stabilitás"] },
+    q2: { focus: "Mérnöki Műhely", desc: "Számítások, modellek és szabadalmak.", tags: ["Akadémiai Precizitás", "Mérnöki Igényesség", "Műszaki Viták"] },
+    q3: { focus: "Startup Nyomozóiroda", desc: "Pörgős, tesztekkel teli környezet.", tags: ["Agilitás", "Ügyfélközpontúság", "Tesztelési Láz"] },
+    q4: { focus: "Skunk Works Inkubátor", desc: "Bürokráciamentes kutatóközpont.", tags: ["Radikális Szabadság", "Bürokráciamentesség", "Kockázatvállalás"] }
+  },
+  { id: "penzugy", name: "Pénzügy & Megtérülés", title: "Költségtervezés és Kontrolling", desc: "Hogyan tervezünk büdzsét?",
+    q1: { focus: "Fix OPEX Tervezés", desc: "Forintra tervezhető működési büdzsé.", tags: ["EVM — Értékelemzés", "OPEX Költségkeret", "Fajlagos Egységköltség"] },
+    q2: { focus: "Fázisolt CAPEX Keret", desc: "Mérföldkő alapú forrásfelszabadítás.", tags: ["CAPEX Beruházási Keret", "Stage-Gate Kapubüdzsé", "Szabadalmi Megtérülés"] },
+    q3: { focus: "Lean Kísérleti Keret", desc: "Kisméretű, gyorsan forgó keret.", tags: ["CAC & LTV Mutatók", "Burn Rate Tőkeégetés", "Lean Kísérleti Keret"] },
+    q4: { focus: "Kockázati Tőke (VC)", desc: "Tudatos veszteségfinanszírozás a jövőért.", tags: ["VC Belső Kockázati Tőke", "Magvető Tőkeallokáció", "Tanulási Költség"] }
+  },
+  { id: "szerzodes", name: "Szerződéses Struktúrák", title: "Szerződések és Kockázatmegosztás", desc: "Milyen szerződést kössünk?",
+    q1: { focus: "Fix Ár & Kötbér", desc: "Rögzített terjedelem és határidő.", tags: ["Fixed Price Szerződés", "EPC Turnkey Fővállalkozás", "SLA & Kötbérgarancia"] },
+    q2: { focus: "Fázisolt Mérföldkő", desc: "Szakaszos finanszírozás kapukkal.", tags: ["Milestone T&M Elszámolás", "IP Megosztási Szerződés", "K+F Keretmegállapodás"] },
+    q3: { focus: "Gain-Share Sikerdíj", desc: "Megtakarítás-arányos elszámolás.", tags: ["Gain-Share Megtakarítás", "Rugalmas SOW Munkaleírás", "Értékalapú Sikerdíj"] },
+    q4: { focus: "Kapacitásalapú T&M", desc: "Tiszta idő- és anyagelszámolás.", tags: ["T&M Elszámolás", "Agile Keretszerződés", "Kockázati Együttműködés"] }
+  },
+  { id: "jog", name: "Jog & Compliance", title: "Jog és Szabályozási Megfelelés", desc: "Hogyan működik a jogi megfelelés?",
+    q1: { focus: "Szigorú Megfelelés", desc: "A bírságok nullára szorítása.", tags: ["GDPR Megfelelés", "Bírságkizárási Garanciák", "Audit Fegyelem"] },
+    q2: { focus: "Szabadalmi Védelem", desc: "Szellemi tulajdon és titoktartás.", tags: ["Patent Portfólió", "NDA Titoktartás", "Licencvédelmi Stratégia"] },
+    q3: { focus: "Szabályozói Homokozó", desc: "Kísérleti környezet tesztelésre.", tags: ["Regulatory Sandbox", "Piacralépési Engedély", "Rugalmas ÁSZF"] },
+    q4: { focus: "Új Szabályozási Keretek", desc: "A cég alakítja az új szabályokat.", tags: ["Precedensteremtő Jog", "Szabályozási Lobbi", "Felelősségbiztosítás"] }
+  },
+  { id: "hibakultura", name: "Hibakultúra & Kockázat", title: "A Hibázáshoz Való Viszony", desc: "Mit tesz a cég hiba esetén?",
+    q1: { focus: "ZÉRÓ TOLERANCIA", desc: "A hiba leállást és közvetlen kárt okoz.", tags: ["Nulla Hiba Elv", "RCA Gyökérok-elemzés", "SOP Fegyelmi Protokoll"] },
+    q2: { focus: "KONTROLLÁLT HIBA", desc: "Laborban kötelező, élesben tilos.", tags: ["Biztonságos Laborteszt", "Prototípus Terhelés", "Tesztpad Ellenőrzés"] },
+    q3: { focus: "TANULÁSI LEHETŐSÉG", desc: "A piaci bukás érték és megtakarítás.", tags: ["Olcsó Korai Bukás", "Gyors Tanulási Ciklus", "Vevői Visszajelzés"] },
+    q4: { focus: "ALAPFELTÉTEL", desc: "A 100%-os siker a középszerűség jele.", tags: ["Radikális Kísérletezés", "Kudarc-Ünneplés", "Bátorság a Ködben"] }
+  },
+  { id: "igyszoktuk", name: "„Így szoktuk” Csapdája", title: "A Megszokás Kétélű Kardja", desc: "Hogyan válik a rutin mérgezővé?",
+    q1: { focus: "ÉLETMÉNTŐ BIZTONSÁG", desc: "Az „így szoktuk” menti meg az ellátást.", tags: ["Üzembiztonsági Garancia", "Kiszámítható Stabilitás", "Szabványminőség"] },
+    q2: { focus: "MÉRNÖKI KORLÁT", desc: "A régi dogmák gátolják az áttörést.", tags: ["Mérnöki Dogmák Lebontása", "Megszokás Falai", "Technológiai Vakság"] },
+    q3: { focus: "PIACI VAKFOLT", desc: "Elrejti a vevő valódi igényét.", tags: ["Ügyfélsüketség Megtörése", "Belső Fókusz Felszámolása", "Rejtett Veszteség"] },
+    q4: { focus: "HALÁLOS MÉREG", desc: "A bürokrácia megöli a jövőt.", tags: ["Bürokratikus Fojtogatás", "Innovációgyilkosság", "Lassú Halál Elkerülése"] }
+  },
+  { id: "buktatok", name: "Kormányzási Buktatók", title: "Tipikus Vezetői Buktatók", desc: "A legsúlyosabb menedzsment-tévedések.",
+    q1: { focus: "Nosztalgia-Finanszírozás", desc: "Rutinfolyamatok védelme az automata ellen.", tags: ["Elkésett Automatizáció", "Drága Kényelem Felszámolása", "Margó-Erózió"] },
+    q2: { focus: "Túlbonyolított Zsákutca", desc: "Fejlesztés a polcnak a piac helyett.", tags: ["Túlmérnökölés", "Polcnak Fejlesztés", "Eltévedt K+F Korrekció"] },
+    q3: { focus: "A Kalapács Szindróma", desc: "Eszköz van, de nincs valós fájdalompont.", tags: ["Eszköz-Imádat Felszámolása", "Felesleges Funkciók", "Elmaradt Piacralépés"] },
+    q4: { focus: "A Felfedezés Megfojtása", desc: "Fix ROI követelése a ködben induló ötletre.", tags: ["Türelmetlen Tőke Csapdája", "Kísérlet-Tiltás Feloldása", "Jövővesztés Megakadályozása"] }
+  }
+];
+
+let currentDim = 0;
+let isIntroMode = false;
+let revealedIntroQuadrants = new Set();
+const defaultRevealOrder = ['q1', 'q2', 'q3', 'q4'];
+let focusedCard = null;
+let spotlightCard = null;
+const stage = document.getElementById('stage');
+
+const artElements = {
+  q1: `<svg viewBox="0 0 120 80" fill="none"><rect x="9" y="18" width="24" height="18" rx="5" fill="currentColor" opacity=".15" stroke="currentColor"/><rect x="48" y="18" width="24" height="18" rx="5" fill="currentColor" opacity=".15" stroke="currentColor"/><rect x="87" y="18" width="24" height="18" rx="5" fill="currentColor" opacity=".15" stroke="currentColor"/><path d="M33 27h15M72 27h15" stroke="currentColor" stroke-width="2"/><circle cx="21" cy="56" r="8" fill="currentColor" opacity=".15"/><path d="m17.5 56 2.6 2.6 5.1-6" stroke="currentColor" stroke-width="2.2"/></svg>`,
+  q2: `<svg viewBox="0 0 120 80" fill="none"><circle cx="21" cy="23" r="7" fill="currentColor" opacity=".16"/><circle cx="57" cy="15" r="6" fill="currentColor" opacity=".24"/><circle cx="95" cy="28" r="8" fill="currentColor" opacity=".16"/><circle cx="77" cy="59" r="7" fill="currentColor" opacity=".28"/><circle cx="31" cy="59" r="6" fill="currentColor" opacity=".13"/><path d="M27 21 51 16m12 2 25 7M91 35 81 52M70 58 37 59M28 53 23 30" stroke="currentColor" stroke-width="1.8"/></svg>`,
+  q3: `<svg viewBox="0 0 120 80" fill="none"><circle cx="60" cy="40" r="10" fill="currentColor" opacity=".16"/><path d="M25 40a35 35 0 0 1 57-27" stroke="currentColor" stroke-width="2"/><path d="M95 40a35 35 0 0 1-57 27" stroke="currentColor" stroke-width="2"/></svg>`,
+  q4: `<svg viewBox="0 0 120 80" fill="none"><circle cx="19" cy="20" r="3" fill="currentColor"/><circle cx="38" cy="31" r="4" fill="currentColor" opacity=".7"/><circle cx="61" cy="15" r="3" fill="currentColor" opacity=".55"/><circle cx="82" cy="28" r="4" fill="currentColor" opacity=".8"/><circle cx="103" cy="18" r="3" fill="currentColor"/><path d="m21 22 14 7 23-12 20 9 22-7" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 4"/></svg>`
+};
+Object.entries(artElements).forEach(([q, svg]) => {
+  const el = document.getElementById(`art-${q}`);
+  if (el) el.innerHTML = svg;
+});
+
+function renderBottomBar() {
+  const bar = document.getElementById('bottomBar');
+  if (!bar) return;
+  bar.innerHTML = dimensions.map((d, i) => {
+    const isActive = !isIntroMode && i === currentDim;
+    return `<button class="dim-pill ${isActive ? 'active' : ''}" onclick="selectDim(${i})">
+      <span class="dim-pill-idx">${String(i+1).padStart(2,'0')}</span>
+      <span class="dim-pill-text">${d.name}</span>
+    </button>`;
+  }).join('');
+}
+
+function render() {
+  const body = document.body;
+  const actionBtn = document.getElementById('mainActionBtn');
+  const introBtn = document.getElementById('introModeBtn');
+  const meta = document.getElementById('headerMeta');
+
+  if (isIntroMode) {
+    body.classList.add('mode-intro');
+    if (introBtn) introBtn.classList.add('active-warn');
+    document.getElementById('dimNumber').textContent = "INTRO";
+    document.getElementById('dimName').textContent = "A Mátrix Felépítése";
+    document.getElementById('dimTitle').textContent = revealedIntroQuadrants.size === 0 ? "A Döntési Koordinátarendszer" : `${revealedIntroQuadrants.size} / 4 Negyed Elnevezve`;
+    document.getElementById('dimDesc').textContent = "Kattints a negyedekre az elnevezéshez!";
+    if (meta) meta.textContent = `${revealedIntroQuadrants.size} / 4 negyed elnevezve`;
+    if (actionBtn) actionBtn.textContent = revealedIntroQuadrants.size < 4 ? `Következő (Space) →` : `Mátrix Indítása ➔`;
+
+    ['q1', 'q2', 'q3', 'q4'].forEach(q => {
+      const card = document.getElementById(`card-${q}`);
+      if (!card) return;
+      if (revealedIntroQuadrants.has(q)) {
+        card.classList.remove('intro-unrevealed'); card.classList.add('intro-revealed');
+      } else {
+        card.classList.remove('intro-revealed'); card.classList.add('intro-unrevealed');
+      }
+    });
+  } else {
+    body.classList.remove('mode-intro');
+    if (introBtn) introBtn.classList.remove('active-warn');
+    if (actionBtn) actionBtn.textContent = "Következő Réteg →";
+
+    const d = dimensions[currentDim];
+    document.getElementById('dimNumber').textContent = `${String(currentDim + 1).padStart(2, '0')} / ${String(dimensions.length).padStart(2, '0')}`;
+    document.getElementById('dimName').textContent = d.name;
+    document.getElementById('dimTitle').textContent = d.title;
+    document.getElementById('dimDesc').textContent = d.desc;
+    if (meta) meta.textContent = `12 dimenziós modell · Kattints a címkékre!`;
+
+    ['q1', 'q2', 'q3', 'q4'].forEach(q => {
+      const card = document.getElementById(`card-${q}`);
+      if (!card) return;
+      card.classList.remove('intro-unrevealed', 'intro-revealed');
+      const c = d[q];
+      document.getElementById(`focus-${q}`).textContent = c.focus;
+      document.getElementById(`desc-${q}`).textContent = c.desc;
+      document.getElementById(`tags-${q}`).innerHTML = (c.tags || []).map(tag => {
+        const safe = tag.replace(/"/g, '&quot;');
+        return `<button class="tag" data-tag="${safe}">${tag}</button>`;
+      }).join('');
+    });
+  }
+  renderBottomBar();
+}
+
+// BIZTOS KATTINTÁSKEZELÉS CÍMKÉKRE
+document.addEventListener('click', function(e) {
+  const tagBtn = e.target.closest('button.tag');
+  if (tagBtn) {
+    e.preventDefault(); e.stopPropagation();
+    const tagName = tagBtn.getAttribute('data-tag');
+    if (tagName) {
+      const tool = getToolDetails(tagName);
+      document.getElementById('mTitle').textContent = tool.name;
+      document.getElementById('mBadge').textContent = tool.badge;
+      document.getElementById('mDesc').innerHTML = tool.desc;
+      document.getElementById('mHow').innerHTML = tool.how;
+      document.getElementById('mQuote').innerHTML = tool.quote;
+      document.getElementById('mSvgContainer').innerHTML = tool.svg;
+      document.getElementById('toolModal').style.display = 'flex';
+    }
+  }
+});
+
+function closeToolModal(e) {
+  if (!e || e.target.id === 'toolModal' || (e.target.classList && e.target.classList.contains('modalclose'))) {
+    document.getElementById('toolModal').style.display = 'none';
+  }
+}
+
+['q1', 'q2', 'q3', 'q4'].forEach(q => {
+  const card = document.getElementById(`card-${q}`);
+  if (card) {
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('button')) return;
+      if (isIntroMode) {
+        if (revealedIntroQuadrants.has(q)) revealedIntroQuadrants.delete(q);
+        else revealedIntroQuadrants.add(q);
+        render(); return;
+      }
+      if (focusedCard === q) {
+        focusedCard = null; stage.classList.remove('focus-mode');
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('expanded'));
+      } else if (spotlightCard === q) {
+        spotlightCard = null; stage.classList.remove('spotlight-active');
+        focusedCard = q; stage.classList.add('focus-mode');
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('expanded'));
+        card.classList.add('expanded');
+      } else {
+        spotlightCard = q; stage.classList.add('spotlight-active');
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('is-spotlight'));
+        card.classList.add('is-spotlight');
+      }
+    });
+  }
+});
+
+function closeFocus(e) {
+  if (e) e.stopPropagation();
+  focusedCard = null; stage.classList.remove('focus-mode');
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('expanded'));
+}
+
+function selectDim(i) {
+  isIntroMode = false; currentDim = i; closeFocus();
+  spotlightCard = null; stage.classList.remove('spotlight-active');
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('is-spotlight'));
+  render();
+}
+function nextDim() {
+  if (isIntroMode) {
+    const next = defaultRevealOrder.find(q => !revealedIntroQuadrants.has(q));
+    if (next) { revealedIntroQuadrants.add(next); render(); }
+    else { isIntroMode = false; currentDim = 0; render(); }
+  } else selectDim((currentDim + 1) % dimensions.length);
+}
+function prevDim() { if (!isIntroMode) selectDim((currentDim - 1 + dimensions.length) % dimensions.length); }
+
+function toggleIntroMode() {
+  isIntroMode = !isIntroMode; if (isIntroMode) revealedIntroQuadrants.clear();
+  closeFocus(); render();
+}
+
+const processImages = {
+  q1: { src: "process_q1.jpg", kicker: "Q1 // WATERFALL", title: "A Vízesés Modell Lépcsői", copy: "<div class='copybox'><p><strong>Vízesés folyamat:</strong> Szekvenciális építkezés követelményektől átadásig.</p></div>" },
+  q2: { src: "process_q2.jpg", kicker: "Q2 // STAGE-GATE", title: "K+F Döntési Kapuk", copy: "<div class='copybox'><p><strong>Stage-Gate modell:</strong> Kutatási fázisok és Go/Kill kapuk.</p></div>" },
+  q3: { src: "process_q3.jpg", kicker: "Q3 // LEAN VSM", title: "Értékáram-Térkép", copy: "<div class='copybox'><p><strong>Lean szemlélet:</strong> Kanban szálak és veszteségmentesített áramlás.</p></div>" },
+  q4: { src: "process_q4.jpg", kicker: "Q4 // AGILE", title: "Squadok és Sprintek", copy: "<div class='copybox'><p><strong>Agilis tanulás:</strong> Iteratív ciklusok és terméknövekmény a ködben.</p></div>" }
+};
+
+function openProcessModal(e, q) {
+  if (e) e.stopPropagation();
+  const data = processImages[q];
+  if (!data) return;
+  document.getElementById('imgModalKicker').textContent = data.kicker;
+  document.getElementById('imgModalTitle').textContent = data.title;
+  document.getElementById('modalImgDisplay').src = data.src;
+  document.getElementById('imgModalCopy').innerHTML = data.copy;
+  document.getElementById('imageModal').style.display = 'flex';
+}
+function closeImageModal(e) {
+  if (!e || e.target.id === 'imageModal' || (e.target.classList && e.target.classList.contains('modalclose'))) {
+    document.getElementById('imageModal').style.display = 'none';
+  }
+}
+
+function openTeamsModal() { document.getElementById('teamsModal').style.display = 'flex'; }
+function closeTeamsModal(e) {
+  if (!e || e.target.id === 'teamsModal' || (e.target.classList && e.target.classList.contains('modalclose'))) {
+    document.getElementById('teamsModal').style.display = 'none';
+  }
+}
+function openScriptModal() { document.getElementById('scriptModal').style.display = 'flex'; }
+function closeScriptModal(e) {
+  if (!e || e.target.id === 'scriptModal' || (e.target.classList && e.target.classList.contains('modalclose'))) {
+    document.getElementById('scriptModal').style.display = 'none';
+  }
+}
+
+let isBlackoutActive = false;
+function toggleBlackout() {
+  isBlackoutActive = !isBlackoutActive;
+  document.getElementById('trueBlackoutOverlay').style.display = isBlackoutActive ? 'flex' : 'none';
+  const btn = document.getElementById('blackoutBtn');
+  if (btn) {
+    if (isBlackoutActive) { btn.classList.add('active-warn'); btn.textContent = "☀️ Világosítás (B)"; }
+    else { btn.classList.remove('active-warn'); btn.textContent = "⬛ Feketítés (B)"; }
+  }
+}
+
+let isLifecycleActive = false;
+function toggleLifecycleOverlay() {
+  isLifecycleActive = !isLifecycleActive;
+  document.getElementById('lifecycleSvgOverlay').style.display = isLifecycleActive ? 'block' : 'none';
+  const btn = document.getElementById('lifecycleBtn');
+  if (btn) {
+    if (isLifecycleActive) btn.classList.add('active-warn');
+    else btn.classList.remove('active-warn');
+  }
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+  else if (document.exitFullscreen) document.exitFullscreen();
+}
+
+window.addEventListener('keydown', e => {
+  if (e.key.toLowerCase() === 'b') { toggleBlackout(); return; }
+  if (isBlackoutActive) { toggleBlackout(); return; }
+  if (e.key.toLowerCase() === 'l') { toggleLifecycleOverlay(); return; }
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
+    closeFocus(); return;
+  }
+  if (e.code === 'Space' || e.key === 'Enter') { e.preventDefault(); nextDim(); }
+  else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextDim();
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevDim();
+  else if (e.key.toLowerCase() === 'i') toggleIntroMode();
+  else if (e.key.toLowerCase() === 'f') toggleFullscreen();
+});
+
+render();
+</script>
 </body>
 </html>
