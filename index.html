@@ -434,7 +434,7 @@ function getToolDetails(key, dimId) {
   if (k.includes('mvp') || k.includes('lean startup')) return { name: "MVP — Minimum Viable Product", badge: "Q3 // PIACI VALIDÁCIÓ", desc: "Működőképes verzió a valós piaci kereslet igazolására.", how: "Build ➔ Measure ➔ Learn gyors hurok.", quote: "„Ha nem érzed kínosnak az első verziót, túl későn léptél piacra.”", svg: svgLib.mvp };
   if (k.includes('vsm') || k.includes('értékáram') || k.includes('ertek') || k.includes('muda')) return { name: "VSM — Értékáram-optimalizálás", badge: "Q3 // LEAN", desc: "Feltérképezi az értéknövelő lépéseket és kizárja a várakozást.", how: "Láthatóvá teszi a folyamatban rejtőző veszteségeket.", quote: "„A felesleges várakozás tiszta veszteség.”", svg: svgLib.vsm };
 
-  // 2. DIMENZIÓ ALAPÚ SZŰRÉS (GARANTÁLTAN A MEGFELELŐ KATEGÓRIA!)
+  // 2. DIMENZIÓ ALAPÚ SZŰRÉS
   if (dimId === "ai" || k.includes('rpa') || k.includes('ocr') || k.includes('workflow') || k.includes('erp') || k.includes('robot') || k.includes('neurális') || k.includes('kvantum') || k.includes('agent') || k.includes('ágens')) {
     return { name: key, badge: "AI & DIGITÁLIS ESZKÖZ", desc: "Automatizációs és mesterséges intelligencia eszköz a gyors döntésekért.", how: "Kiváltja a repetitív manuális munkát és pontos modellezést ad.", quote: "„A gép számoljon, az ember döntsön.”", svg: svgLib.tech };
   }
